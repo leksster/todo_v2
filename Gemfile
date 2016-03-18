@@ -32,6 +32,11 @@ gem 'bower-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'haml'
+gem 'compass'
+gem 'compass-rails'
+
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
