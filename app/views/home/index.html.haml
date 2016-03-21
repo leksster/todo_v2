@@ -1,0 +1,87 @@
+.container.main{"ng-app"=>"todo"}
+  %h1.text-center SIMPLE TODO LISTS
+  %p.text-center FROM RUBY GARAGE
+  .row.title-box
+    .hidden-xs.note-box
+      = image_tag('icon-note.fw.png')
+    .col-xs-10.col-sm-10
+      Complete the test task for Ruby Garage Comple
+    .col-xs-2.col-sm-2
+      %ul.list-inline.top-icons.pull-right
+        %li
+          = link_to image_tag('icon-pensil-top.fw.png'), '#'
+        %li
+          = link_to image_tag('icon-trash-top.fw.png'), '#', class: 'text-right'
+  .row.form-box
+    .hidden-xs.note-box
+      = image_tag('icon-plus.fw.png', class: "icon-plus")
+    .col-xs-12.col-sm-12
+      %form
+        .input-group
+          %input.form-control{type: 'text', placeholder: 'Start typing here to create a task...'}
+          %span.input-group-btn
+            %button.btn.btn-default.submit{type: 'button'}
+              Add Task
+  .content            
+    .row.content-box
+      .check-box
+        %input{type: 'checkbox'}
+      .divider
+      .col-xs-10.content-text
+        Open this mock-up in Adobe Fireworks % Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+
+        .row.comment
+          .col-xs-12            
+            %blockquote
+              %p 
+                {{ comment }}
+        .row
+          .col-xs-12
+            %form.form-inline
+              .form-group
+                %textarea.form-control{type:'text', placeholder: 'Enter your name', :autofocus=>'', 'ng-model'=> 'comment'}
+
+      .col-xs-2.icons-edit
+        %ul.list-inline
+          %li
+            = link_to image_tag('icon-up-down-item.fw.png'), '#'
+          %li
+            = link_to image_tag('icon-pensil-item.fw.png'), '#'
+          %li
+            = link_to image_tag('icon-trash-item.fw.png'), '#'
+  
+    .row.content-box
+      .check-box
+        %input{type: 'checkbox'}
+      .divider
+      .col-xs-10.content-text
+        Open this mock-up in Adobe Fireworks % Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      .col-xs-2.icons-edit
+        %ul.list-inline
+          %li
+            = link_to image_tag('icon-up-down-item.fw.png'), '#'
+          %li
+            = link_to image_tag('icon-pensil-item.fw.png'), '#'
+          %li
+            = link_to image_tag('icon-trash-item.fw.png'), '#'
+
+    .row.content-box
+      .check-box
+        %input{type: 'checkbox'}
+      .divider
+      .col-xs-10.content-text
+        Open this mock-up in Adobe Fireworks % Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      .col-xs-2.icons-edit
+        %ul.list-inline
+          %li
+            = link_to image_tag('icon-up-down-item.fw.png'), '#'
+          %li
+            = link_to image_tag('icon-pensil-item.fw.png'), '#'
+          %li
+            = link_to image_tag('icon-trash-item.fw.png'), '#'
+
+  .row
+    .col-xs-12.center-block.add-list-button
+      %button.btn.btn-primary.main_button
+        = image_tag('icon-plus-blue.fw.png')
+        Add TODO List

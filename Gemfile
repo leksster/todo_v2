@@ -32,7 +32,7 @@ gem 'bower-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'haml'
+gem 'haml-rails'
 gem 'compass'
 gem 'compass-rails'
 
