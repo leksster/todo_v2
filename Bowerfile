@@ -5,3 +5,7 @@
 
 asset 'angular'
 asset 'bootstrap-sass-official'
+asset 'angular-xeditable'
+asset 'angular-bootstrap'
+asset 'angular-loading-bar'
+asset 'angular-resource'

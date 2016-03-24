@@ -1,0 +1,27 @@
+<div class="container main">
+  <div class="sceleton">
+    <div class="project">
+      <div class="row title-box">
+        <div class="hidden-xs note-box">
+          <%= image_tag('icon-note.fw.png') %>
+        </div>
+        <div class="col-xs-12 col-sm-12 text-center">
+          <input class="form-control" ng-model="text" placeholder="Start typing here to create project list..." type="text"></input>
+        </div>
+      </div>
+      <br/>
+      <div class="row center-block">
+        <div class="col-sm-offset-3 col-sm-3">
+          <button class="btn btn-success btn-block submit" ng-click="taskCtrl.addTask(project)" type="submit">
+            Create
+          </button>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-danger btn-block submit" ng-click="taskCtrl.addTask(project)" type="submit">
+            Cansel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,87 +1,92 @@
 .container.main{"ng-app"=>"todo"}
   %h1.text-center SIMPLE TODO LISTS
   %p.text-center FROM RUBY GARAGE
-  .row.title-box
-    .hidden-xs.note-box
-      = image_tag('icon-note.fw.png')
-    .col-xs-10.col-sm-10
-      Complete the test task for Ruby Garage Comple
-    .col-xs-2.col-sm-2
-      %ul.list-inline.top-icons.pull-right
-        %li
-          = link_to image_tag('icon-pensil-top.fw.png'), '#'
-        %li
-          = link_to image_tag('icon-trash-top.fw.png'), '#', class: 'text-right'
-  .row.form-box
-    .hidden-xs.note-box
-      = image_tag('icon-plus.fw.png', class: "icon-plus")
-    .col-xs-12.col-sm-12
-      %form
-        .input-group
-          %input.form-control{type: 'text', placeholder: 'Start typing here to create a task...'}
-          %span.input-group-btn
-            %button.btn.btn-default.submit{type: 'button'}
-              Add Task
-  .content            
-    .row.content-box
-      .check-box
-        %input{type: 'checkbox'}
-      .divider
-      .col-xs-10.content-text
-        Open this mock-up in Adobe Fireworks % Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+  .sceleton{'ng-controller'=>'ProjectController'}
+    .col-xs-12.text-center{'ng-if'=>'!showData'}
+      %h6
+        {{ message }}
+    .project{'ng-if'=>'showData','ng-repeat'=>"project in projects | orderBy: '-created_at'"}
+      .row.title-box
+        .hidden-xs.note-box
+          = image_tag('icon-note.fw.png')
+        .col-xs-10.col-sm-10
+          %span{'editable-text'=>'project.name', 'e-form'=>'editProject', 'onaftersave'=>'updateProject(project)', 'name'=>"project", 'id' => "{{ $index }}"}
+            {{ project.name }}
+        .col-xs-2.col-sm-2
+          %ul.list-inline.top-icons.pull-right.hide
+            %li
+              %a{'ng-click'=>'editProject.$show()', 'ng-hide'=>'editProject.$visible'} 
+                = image_tag('icon-pensil-top.fw.png')
+            %li
+              %a{'ng-click'=>'removeProject(project)'}
+                = image_tag('icon-trash-top.fw.png')
 
-        .row.comment
-          .col-xs-12            
-            %blockquote
-              %p 
-                {{ comment }}
-        .row
-          .col-xs-12
-            %form.form-inline
-              .form-group
-                %textarea.form-control{type:'text', placeholder: 'Enter your name', :autofocus=>'', 'ng-model'=> 'comment'}
+      .content{'ng-controller'=>'TaskController'}
+        .row.form-box
+          .hidden-xs.note-box
+            = image_tag('icon-plus.fw.png', class: "icon-plus")
+          .col-xs-12.col-sm-12
+            %form{:name=>'taskForm', :novalidate=>''}
+              .input-group
+                %input.form-control{type: 'text', placeholder: 'Start typing here to create a task...', 'ng-model' => 'newTaskText', required: ''}
+                %span.input-group-btn
+                  %button.btn.btn-default.submit{type: 'submit', 'ng-click' => 'createTask(project)'}
+                    Add Task
+          / %div{'ng-repeat'=>'t in tasks'}
+          /   {{t}}
+        
+        .row.content-box{'ng-show'=>'text'}
+          .check-box
+            %input{type: 'checkbox'}
+          .divider
+          .col-xs-10.content-text
+            {{ text }}
+          .col-xs-2.icons-edit
+            %ul.list-inline.hide
+              %li
+                = link_to image_tag('icon-up-down-item.fw.png'), '#'
+              %li
+                = link_to image_tag('icon-pensil-item.fw.png'), '#'
+              %li
+                = link_to image_tag('icon-trash-item.fw.png'), '#'
 
-      .col-xs-2.icons-edit
-        %ul.list-inline
-          %li
-            = link_to image_tag('icon-up-down-item.fw.png'), '#'
-          %li
-            = link_to image_tag('icon-pensil-item.fw.png'), '#'
-          %li
-            = link_to image_tag('icon-trash-item.fw.png'), '#'
-  
-    .row.content-box
-      .check-box
-        %input{type: 'checkbox'}
-      .divider
-      .col-xs-10.content-text
-        Open this mock-up in Adobe Fireworks % Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      .col-xs-2.icons-edit
-        %ul.list-inline
-          %li
-            = link_to image_tag('icon-up-down-item.fw.png'), '#'
-          %li
-            = link_to image_tag('icon-pensil-item.fw.png'), '#'
-          %li
-            = link_to image_tag('icon-trash-item.fw.png'), '#'
+        .row.content-box{'ng-repeat'=>"task in project.tasks | orderBy: '-id'"}
+          .check-box
+            %input{type: 'checkbox'}
+          .divider
+          .col-xs-10.content-text
+            %span{'editable-text'=>'task.text', 'e-form'=>'editTask', 'onaftersave'=>'updateTask(project, task)', 'name'=>"task", 'id' => "{{ $index }}"}
+              {{ task.text }}
+            .comments{'ng-show'=>'showComments'}
+              .row.comment
+                .col-xs-12            
+                  %blockquote
+                    %p 
+                      {{ comment }}
+              .row
+                .col-xs-12
+                  %form.form-inline
+                    .form-group
+                      %textarea.form-control{type:'text', placeholder: 'Enter your name', :autofocus=>'', 'ng-model'=> 'comment'}
 
-    .row.content-box
-      .check-box
-        %input{type: 'checkbox'}
-      .divider
-      .col-xs-10.content-text
-        Open this mock-up in Adobe Fireworks % Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      .col-xs-2.icons-edit
-        %ul.list-inline
-          %li
-            = link_to image_tag('icon-up-down-item.fw.png'), '#'
-          %li
-            = link_to image_tag('icon-pensil-item.fw.png'), '#'
-          %li
-            = link_to image_tag('icon-trash-item.fw.png'), '#'
+          .col-xs-2.icons-edit
+            %ul.list-inline.hide
+              %li
+                = link_to image_tag('icon-up-down-item.fw.png'), '#'
+              %li
+                %a{'ng-click'=>'editTask.$show()', 'ng-hide'=>'editTask.$visible'} 
+                  = image_tag('icon-pensil-item.fw.png')                
+              %li
+                %a{'ng-click'=>'removeTask(task)'}
+                  = image_tag('icon-trash-item.fw.png')
+                / = link_to image_tag('icon-trash-item.fw.png'), '#'
 
-  .row
-    .col-xs-12.center-block.add-list-button
-      %button.btn.btn-primary.main_button
-        = image_tag('icon-plus-blue.fw.png')
-        Add TODO List
+    .row
+      .col-xs-12.center-block.add-list-button{'ng-controller'=>'ModalCtrl'}
+        %button.btn.btn-primary.main_button{'ng-click'=>'open("sm")'}
+          = image_tag('icon-plus-blue.fw.png')
+          Add TODO List
+    .row
+      .col-xs-12
+        %br
+        %br

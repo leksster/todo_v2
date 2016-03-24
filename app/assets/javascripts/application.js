@@ -13,4 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular/angular
+//= require angular-xeditable/dist/js/xeditable
+//= require angular-bootstrap/ui-bootstrap
+//= require angular-bootstrap/ui-bootstrap-tpls
+//= require angular-loading-bar/build/loading-bar
+//= require angular-resource/angular-resource
 //= require_tree .
+//= require controllers/project
+//= require services/models
+//= require controllers/modal
