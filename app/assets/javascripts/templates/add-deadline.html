@@ -1,0 +1,17 @@
+<div class="modal-header" >
+    <h3 class="modal-title">Please select deadline of your task.</h3>
+</div>
+<form>
+<div ng-controller="DatepickerDemoCtrl">
+  <div class="modal-body text-center">
+      <div style="display:inline-block; min-height:290px;">
+        <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
+        <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="submit" ng-click="ok(dt)">OK</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</div>
+</form>

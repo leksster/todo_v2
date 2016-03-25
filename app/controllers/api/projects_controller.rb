@@ -20,7 +20,7 @@ class Api::ProjectsController < ApplicationController
 
   def destroy
     set_project.destroy
-    render json: set_project
+    render nothing: true
   end
 
   private
@@ -29,6 +29,6 @@ class Api::ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit('name')
+    params.require(:project).permit(:id, :name, :tasks)
   end
 end

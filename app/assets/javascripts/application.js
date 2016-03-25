@@ -16,9 +16,11 @@
 //= require angular-xeditable/dist/js/xeditable
 //= require angular-bootstrap/ui-bootstrap
 //= require angular-bootstrap/ui-bootstrap-tpls
+//= require ng-sortable/dist/ng-sortable
 //= require angular-loading-bar/build/loading-bar
 //= require angular-resource/angular-resource
 //= require_tree .
+//= require controllers/modal
 //= require controllers/project
 //= require services/models
-//= require controllers/modal
+

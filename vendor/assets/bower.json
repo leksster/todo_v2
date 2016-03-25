@@ -6,6 +6,7 @@
     "angular-xeditable": "latest",
     "angular-bootstrap": "latest",
     "angular-loading-bar": "latest",
-    "angular-resource": "latest"
+    "angular-resource": "latest",
+    "ng-sortable": "latest"
   }
 }

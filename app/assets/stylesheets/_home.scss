@@ -88,7 +88,11 @@ body {
     border-radius: 0;
   }
 
-  button {
+  button.datepick {
+    height: 30px;
+  }
+
+  button.submit {
     color: #fff !important;
     padding: 0 23px !important;
     height: 30px;
@@ -101,7 +105,7 @@ body {
     background-image: linear-gradient(to bottom, #94CBAE, #508767);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#94CBAE, endColorstr=#508767);
   }
 
-  button:hover {
+  button.submit :hover {
     border:1px solid #51a87a;
     background-color: #72ba94; background-image: -webkit-gradient(linear, left top, left bottom, from(#72ba94), to(#3d674f));
     background-image: -webkit-linear-gradient(top, #72ba94, #3d674f);
@@ -158,8 +162,6 @@ body {
   }
 
 
-
-
   blockquote {
     font-size: 12px;
     margin: 0;
@@ -167,14 +169,15 @@ body {
 
 }
 
-.content > .content-box:last-child {
-  margin-bottom: 15px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom: 1px solid #aaafa4;
-
+.sort > .tasks:last-child {
   .content-text {
     padding-bottom: 30px;
+  }
+  .content-box {
+    margin-bottom: 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom: 1px solid #aaafa4;
   }
 }
 

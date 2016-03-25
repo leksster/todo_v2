@@ -1,4 +1,4 @@
-angular.module('todo').controller('ModalCtrl', function ($scope, $uibModal, $log) {
+angular.module('todo').controller('NewProjectModalCtrl', function ($scope, $uibModal, $log) {
 
     $scope.animationsEnabled = true;
 
@@ -6,7 +6,7 @@ angular.module('todo').controller('ModalCtrl', function ($scope, $uibModal, $log
       var modalInstance = $uibModal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'assets/templates/new-project.html',
-        controller: 'ModalInstanceCtrl',
+        controller: 'ProjectInstanceModalCtrl',
         size: size,
         scope: $scope,
         resolve: {
@@ -23,17 +23,46 @@ angular.module('todo').controller('ModalCtrl', function ($scope, $uibModal, $log
     // });
     };
 
+  })
+
+  .controller('AddDateModalCtrl', function($scope, $uibModal, $log) {
+    $scope.animationsEnabled = true;
+
+    $scope.open = function (size) {
+      var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'assets/templates/add-deadline.html',
+        controller: 'AddDateModalInstanceCtrl',
+        size: size,
+        scope: $scope,
+        resolve: {
+          projectName: function() {
+            return $scope.projectName;
+          }
+        }
+      });
+    };
+
     $scope.toggleAnimation = function () {
       $scope.animationsEnabled = !$scope.animationsEnabled;
     };
-
   })
 
-  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, projectFactory) {
+  .controller('AddDateModalInstanceCtrl', function ($scope, $uibModalInstance, taskFactory) {
+    $scope.ok = function (uDate) {
+      $scope.deadline.date = uDate;
+      $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+  })
+
+  .controller('ProjectInstanceModalCtrl', function ($scope, $uibModalInstance, projectFactory) {
     $scope.ok = function () {
       projectFactory.save({ name:$scope.newProjectName }, function(resource) {
         $scope.projects.push(resource);
-        console.log(resource);
       });
       $uibModalInstance.close();
     };
