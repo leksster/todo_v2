@@ -161,7 +161,18 @@ body {
     text-align: center;
     min-width: 102px;
   }
+  .content-text {
+    a {
+      text-decoration: none;
+      font-size: 13px;
+      color: #999999;
+      font-weight: bold;
+    }
 
+    a:hover {
+      border-bottom: #999999 1px dotted;
+    }
+  }
 
   blockquote {
     font-size: 12px;
@@ -175,7 +186,6 @@ body {
     padding-bottom: 30px;
   }
   .content-box {
-    margin-bottom: 15px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom: 1px solid #aaafa4;
@@ -208,4 +218,63 @@ body {
       float: left;    
     }
   }
+}
+
+.comments {
+  background-color: #fff;
+  border-left: 1px solid #b0b2a1;
+  border-right: 1px solid #b0b2a1;
+  border-bottom: 1px solid #e7ebea;
+
+  hr {
+    margin: 0 0 10px 0;
+  }
+
+  .row {
+    margin: 0 30px;
+  }
+
+  blockquote {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  blockquote:hover {
+    .delete {
+      display: block !important;
+    }
+    .delete:hover {
+      cursor: pointer;
+    }
+  }
+
+  .date {
+    color: #bbb;
+    font-size: 9px;
+  }
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.thumb {
+  width: 100px;
 }

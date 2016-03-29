@@ -2,8 +2,16 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :api, defaults: {format: :json} do
     resources :projects do
-      resources :tasks
+      resources :tasks do
+        resources :comments 
+      end
     end
+
+    resources :comments do
+      resources :attaches
+    end
+
+    resource :attaches, only: [:create]
   end
 
   root 'home#index'

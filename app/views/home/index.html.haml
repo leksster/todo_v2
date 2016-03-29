@@ -41,34 +41,79 @@
                 %input{type: 'checkbox'}
               .divider
               .col-xs-10.content-text
-                %p{'ng-show'=>'task.deadline'}
-                  %span.label.label-warning.pull-right
-                    due to: {{ task.deadline }}    
+                %span.label.label-warning.pull-right{'ng-show'=>'task.deadline'}
+                  due to: {{ task.deadline }}  
+                %span.label.label-warning.pull-right{'ng-show'=>'task.comments.length'}
+                  {{ task.comments.length }}
                 %span{'editable-text'=>'task.text', 'e-form'=>'editTask', 'onaftersave'=>'updateTask(project, task)', 'name'=>"task", 'id' => "{{ $index }}"}
-                  {{ task.text }}
-                .comments{'ng-show'=>'showComments'}
-                  .row.comment
-                    .col-xs-12            
-                      %blockquote
-                        %p 
-                          {{ comment }}
-                  .row
-                    .col-xs-12
-                      %form.form-inline
-                        .form-group
-                          %textarea.form-control{type:'text', placeholder: 'Enter your name', :autofocus=>'', 'ng-model'=> 'comment'}
+                  %a{'ng-click'=>'$parent.$parent.showComments=!$parent.$parent.showComments'}
+                    {{ task.text }}
 
+          
               .col-xs-2.icons-edit
                 %ul.list-inline.hide
                   %li
                     = link_to image_tag('icon-up-down-item.fw.png'), '#'
                   %li
-                    %a{'ng-click'=>'editTask.$show()', 'ng-hide'=>'editTask.$visible'} 
-                      = image_tag('icon-pensil-item.fw.png')                
+                    %a{'ng-click'=>'editTask.$show()'}
+                      = image_tag('icon-pensil-item.fw.png')
                   %li
                     %a{'ng-click'=>'removeTask(task)'}
                       = image_tag('icon-trash-item.fw.png')
-                    / = link_to image_tag('icon-trash-item.fw.png'), '#'
+
+            .comments{'ng-controller'=> 'CommentController', 'ng-show'=>'showComments'}
+              .row
+                .col-xs-12
+                  %h6
+                    Comments: 
+                  %hr
+              .row{'ng-repeat'=> 'comment in task.comments | orderBy: "id"'}
+                .col-xs-12        
+                  %blockquote
+                    %p{'editable-text'=>'comment.text', 'e-form'=>'editComment', 'onaftersave'=>'updateComment(project, task, comment)'} 
+                      {{ comment.text }}
+                      %span.pull-right.delete.hide
+                        %a{'ng-click'=>'removeComment(project, task, comment)'}
+                          = image_tag('icon-trash-item.fw.png')
+                      %span.pull-right.delete.hide
+                        %a{'ng-click'=>'editComment.$show()', 'ng-hide'=>'editComment.$visible'}
+                          = image_tag('icon-pensil-item.fw.png')
+                      %span.pull-right.date
+                        {{ comment.created_at }}
+                    %p{'ng-repeat'=>'attach in comment.attaches'} 
+                      %a{'ng-href' => '{{ attach.file.url }}' }
+                        attachment
+                  %hr
+                    
+
+              .row
+                .col-xs-12{'ng-controller'=>'UploadCtrl'}
+                  %form{'name'=>'uploadForm'}
+                    .row
+                      .form-group
+                        %input.form-control{type:'text', placeholder: 'Comment text...', :autofocus=>'', 'ng-model'=> 'newCommentText'}
+                    .row
+                      .form-group
+                        %span.btn.btn-default.btn-file
+                          %input.filestyle{type: 'file', 'ngf-select'=>'', 'ng-model'=>'file', 'ngf-max-size'=>'30MB', 'ngf-model-invalid'=>'errorFile'}
+                            Attach file
+                          %i{'ng-show'=>'uploadForm.file.$error.maxSize'} File too large {{errorFile.size/ 1000000|number:1}}MB: max 2M
+                        {{ file.name }}
+
+                        %img{'ng-show'=>'uploadForm.file.$valid', 'ngf-thumbnail'=>'file', 'class'=>'thumb'}
+                        %button.btn.btn-default{type: 'button', 'ng-show'=>'file', 'ng-click'=>'file = null'}
+                          Remove
+                    .row
+                      .form-group
+                        %span.progress{'ng-show'=>'file.progress >= 0'}
+                          %div{'style'=>'width: {{file.progress}}%', 'ng-bind'=>'file.progress + "%"'}
+                        %span{'ng-show'=>'file.result'}Upload Successfuel
+                        %span.err{'ng-show'=>'errorMsg'}{{errorMsg}}
+
+                        %button.btn.btn-default.submit{type: 'submit', 'ng-click' => 'uploadPic(file, task, project)'}                  
+                          Add Comment
+
+
 
     .row
       .col-xs-12.center-block.add-list-button{'ng-controller'=>'NewProjectModalCtrl'}
@@ -79,3 +124,15 @@
       .col-xs-12
         %br
         %br
+
+    / .comments{'ng-show'=>'collapsed'}
+    /   .row.comment
+    /     .col-xs-12            
+    /       %blockquote
+    /         %p 
+    /           {{ comment }}
+    /   .row
+    /     .col-xs-12
+    /       %form.form-inline
+    /         .form-group
+    /           %textarea.form-control{type:'text', placeholder: 'Enter your name', :autofocus=>'', 'ng-model'=> 'comment'}                    }

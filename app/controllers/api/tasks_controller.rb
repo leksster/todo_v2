@@ -5,12 +5,12 @@ class Api::TasksController < ApplicationController
   end
 
   def show
-
+    render json: set_task
   end
 
   def create
     task = Task.create!(task_params)
-    render json: task
+    render json: task, include: :comments
   end
 
   def update

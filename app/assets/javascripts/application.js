@@ -19,6 +19,7 @@
 //= require ng-sortable/dist/ng-sortable
 //= require angular-loading-bar/build/loading-bar
 //= require angular-resource/angular-resource
+//= require ng-file-upload/ng-file-upload
 //= require_tree .
 //= require controllers/modal
 //= require controllers/project

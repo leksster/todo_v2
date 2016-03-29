@@ -7,6 +7,7 @@
     "angular-bootstrap": "latest",
     "angular-loading-bar": "latest",
     "angular-resource": "latest",
-    "ng-sortable": "latest"
+    "ng-sortable": "latest",
+    "ng-file-upload": "latest"
   }
 }

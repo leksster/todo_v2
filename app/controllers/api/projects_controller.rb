@@ -1,7 +1,7 @@
 class Api::ProjectsController < ApplicationController
 
   def index
-    render json: Project.all, include: :tasks
+    render json: Project.all, include: { tasks: { include: { comments: { include: :attaches} } } }
   end
 
   def show
@@ -10,7 +10,7 @@ class Api::ProjectsController < ApplicationController
 
   def create
     project = Project.create!(project_params)
-    render json: project, include: :tasks
+    render json: project, include: { tasks: { include: { comments: { include: :attaches} } } }
   end
 
   def update
