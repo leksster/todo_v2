@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it { should have_db_column(:name).of_type(:string) }
+
+  it { should validate_presence_of(:name) }
+
+  it { should have_many(:tasks).dependent(:destroy) }
+  it { should belong_to(:user) }
 end

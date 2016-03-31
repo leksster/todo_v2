@@ -13,7 +13,6 @@ angular.module('todo')
       });
     };
 
-
     $scope.removeComment = function(project, task, comment) {
       var index = $scope.task.comments.indexOf(comment);
       commentFactory.remove({project_id: project.id, task_id: task.id, id: comment.id});
@@ -22,6 +21,10 @@ angular.module('todo')
 
     $scope.updateComment = function(project, task, comment) {
       commentFactory.update({project_id: project.id, task_id: task.id, id: comment.id, text: comment.text});
+    };
+
+    $scope.urlToName = function(url) {
+      return url.split("/").pop();
     };
 
     // $scope.updateProject = function(project) {

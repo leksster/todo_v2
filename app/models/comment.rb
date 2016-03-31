@@ -4,5 +4,5 @@ class Comment < ActiveRecord::Base
 
   validates :text, presence: true
 
-  accepts_nested_attributes_for :attaches
+  accepts_nested_attributes_for :attaches, allow_destroy: true
 end

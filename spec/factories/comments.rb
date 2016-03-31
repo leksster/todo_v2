@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :comment do
-    text "MyText"
-    name "MyString"
+    text Faker::Hipster.sentence(10)
     task nil
   end
 end

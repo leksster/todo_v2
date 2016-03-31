@@ -3,7 +3,7 @@ angular.module('todo')
   .controller('UploadCtrl', ['$scope', 'Upload', '$timeout', 'commentFactory', function ($scope, Upload, $timeout, commentFactory) {
 
     $scope.uploadPic = function(file, task, project) {
-      if(file) {
+      if (file) {
         file.upload = Upload.upload({
           url: 'api/comments',
           data: {

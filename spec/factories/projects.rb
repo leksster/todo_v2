@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :project do
-    name "MyString"
+    name Faker::Hipster.sentence(5)
   end
 end

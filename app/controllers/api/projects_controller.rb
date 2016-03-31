@@ -1,7 +1,7 @@
 class Api::ProjectsController < ApplicationController
 
   def index
-    render json: Project.all, include: { tasks: { include: { comments: { include: :attaches} } } }
+    render json: Project.all, include: { tasks: { include: { comments: { include: :attaches} } } } # ???
   end
 
   def show

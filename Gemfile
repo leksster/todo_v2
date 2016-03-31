@@ -41,8 +41,10 @@ gem 'compass-rails'
 
 
 group :development, :test do
+  gem 'faker'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'selenium-webdriver'

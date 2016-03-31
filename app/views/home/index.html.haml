@@ -43,7 +43,7 @@
               .col-xs-10.content-text
                 %span.label.label-warning.pull-right{'ng-show'=>'task.deadline'}
                   due to: {{ task.deadline }}  
-                %span.label.label-warning.pull-right{'ng-show'=>'task.comments.length'}
+                %span.label.label-danger.pull-right{'ng-show'=>'task.comments.length', 'ng-click'=>'$parent.showComments=!$parent.showComments'}
                   {{ task.comments.length }}
                 %span{'editable-text'=>'task.text', 'e-form'=>'editTask', 'onaftersave'=>'updateTask(project, task)', 'name'=>"task", 'id' => "{{ $index }}"}
                   %a{'ng-click'=>'$parent.$parent.showComments=!$parent.$parent.showComments'}
@@ -74,7 +74,7 @@
                       {{ comment.text }}
                       %span.pull-right.delete.hide
                         %a{'ng-click'=>'removeComment(project, task, comment)'}
-                          = image_tag('icon-trash-item.fw.png')
+                          = image_tag('icon-trash-item.fw.png')                        
                       %span.pull-right.delete.hide
                         %a{'ng-click'=>'editComment.$show()', 'ng-hide'=>'editComment.$visible'}
                           = image_tag('icon-pensil-item.fw.png')
@@ -82,7 +82,7 @@
                         {{ comment.created_at }}
                     %p{'ng-repeat'=>'attach in comment.attaches'} 
                       %a{'ng-href' => '{{ attach.file.url }}' }
-                        attachment
+                        {{ urlToName(attach.file.url) }}
                   %hr
                     
 
@@ -101,7 +101,7 @@
                         {{ file.name }}
 
                         %img{'ng-show'=>'uploadForm.file.$valid', 'ngf-thumbnail'=>'file', 'class'=>'thumb'}
-                        %button.btn.btn-default{type: 'button', 'ng-show'=>'file', 'ng-click'=>'file = null'}
+                        %button.btn.btn-danger{type: 'button', 'ng-show'=>'file', 'ng-click'=>'file = null'}
                           Remove
                     .row
                       .form-group
@@ -110,7 +110,7 @@
                         %span{'ng-show'=>'file.result'}Upload Successfuel
                         %span.err{'ng-show'=>'errorMsg'}{{errorMsg}}
 
-                        %button.btn.btn-default.submit{type: 'submit', 'ng-click' => 'uploadPic(file, task, project)'}                  
+                        %button.btn.btn-primary.submit{type: 'submit', 'ng-click' => 'uploadPic(file, task, project)'}                  
                           Add Comment
 
 
