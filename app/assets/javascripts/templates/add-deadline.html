@@ -1,5 +1,5 @@
 <div class="modal-header" >
-    <h3 class="modal-title">Please select deadline of your task.</h3>
+    <h3 class="modal-title">{{modalOptions.headerText}}</h3>
 </div>
 <form>
 <div ng-controller="DatepickerDemoCtrl">
@@ -10,8 +10,8 @@
       </div>
   </div>
   <div class="modal-footer">
-      <button class="btn btn-primary" type="submit" ng-click="ok(dt)">OK</button>
-      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+      <button class="btn btn-primary" type="submit" ng-click="modalOptions.ok(dt)">{{modalOptions.actionButtonText}}</button>
+      <button class="btn btn-warning" type="button" ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>
   </div>
 </div>
 </form>

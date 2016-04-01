@@ -1,0 +1,49 @@
+.comments{'ng-controller'=> 'CommentController', 'ng-show'=>'showComments'}
+  .row
+    .col-xs-12
+      %h6
+        Comments: 
+      %hr
+  .row{'ng-repeat'=> 'comment in task.comments | orderBy: "id"'}
+    .col-xs-12        
+      %blockquote
+        %p{'editable-text'=>'comment.text', 'e-form'=>'editComment', 'onaftersave'=>'updateComment(project, task, comment)'} 
+          {{ comment.text }}
+          %span.pull-right.delete.hide
+            %a{'ng-click'=>'removeComment(project, task, comment)'}
+              = image_tag('icon-trash-item.fw.png')                        
+          %span.pull-right.delete.hide
+            %a{'ng-click'=>'editComment.$show()', 'ng-hide'=>'editComment.$visible'}
+              = image_tag('icon-pensil-item.fw.png')
+          %span.pull-right.date
+            {{ comment.created_at | date : format : timezone }}
+        %p{'ng-repeat'=>'attach in comment.attaches'} 
+          %a{'ng-href' => '{{ attach.file.url }}' }
+            {{ urlToName(attach.file.url) }}
+      %hr
+  .row
+    .col-xs-12{'ng-controller'=>'UploadCtrl'}
+      %form{'name'=>'uploadForm'}
+        .row
+          .form-group
+            %input.form-control{type:'text', placeholder: 'Comment text...', :autofocus=>'', 'ng-model'=> 'newCommentText'}
+        .row
+          .form-group
+            %span.btn.btn-default.btn-file
+              %input.filestyle{type: 'file', 'ngf-select'=>'', 'ng-model'=>'file', 'ngf-max-size'=>'30MB', 'ngf-model-invalid'=>'errorFile'}
+                Attach file
+              %i{'ng-show'=>'uploadForm.file.$error.maxSize'} File too large {{errorFile.size/ 1000000|number:1}}MB: max 2M
+            {{ file.name }}
+
+            %img{'ng-show'=>'uploadForm.file.$valid', 'ngf-thumbnail'=>'file', 'class'=>'thumb'}
+            %button.btn.btn-danger{type: 'button', 'ng-show'=>'file', 'ng-click'=>'file = null'}
+              Remove
+        .row
+          .form-group
+            %span.progress{'ng-show'=>'file.progress >= 0'}
+              %div{'style'=>'width: {{file.progress}}%', 'ng-bind'=>'file.progress + "%"'}
+            %span{'ng-show'=>'file.result'}Upload Successfuel
+            %span.err{'ng-show'=>'errorMsg'}{{errorMsg}}
+
+            %button.btn.btn-primary.submit{type: 'submit', 'ng-click' => 'uploadPic(file, task, project)'}                  
+              Add Comment

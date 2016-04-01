@@ -20,8 +20,8 @@
 //= require angular-loading-bar/build/loading-bar
 //= require angular-resource/angular-resource
 //= require ng-file-upload/ng-file-upload
+//= require angular-rails-templates
 //= require_tree .
-//= require controllers/modal
 //= require controllers/project
 //= require services/models
 

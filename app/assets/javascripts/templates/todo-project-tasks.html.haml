@@ -1,0 +1,43 @@
+.content{'ng-controller'=>'TaskController'}
+  .row.form-box
+    .hidden-xs.note-box
+      = image_tag('icon-plus.fw.png', class: "icon-plus")
+    .col-xs-12.col-sm-12
+      %form{:name=>'taskForm', :novalidate=>''}
+        .input-group
+          %input.form-control{type: 'text', placeholder: 'Start typing here to create a task...', 'ng-model' => 'newTask', required: ''}
+          %span.input-group-btn
+            %button.btn.btn-default.datepick{type: 'button', 'ng-click'=>'addDeadline()'}
+              %span.glyphicon.glyphicon-calendar
+              {{deadline.date | date : format : timezone}}
+            %button.btn.btn-default.submit{type: 'submit', 'ng-click' => 'createTask(project)'}
+              Add Task
+
+  .sort{'data-as-sortable'=>'dragControlListeners', 'data-ng-model'=>'project.tasks'}
+    .tasks{'ng-repeat'=>"task in project.tasks", 'data-as-sortable-item'=>''}
+      .row.content-box{'data-as-sortable-item-handle'=>''}
+        .check-box
+          %input{type: 'checkbox', 'ng-model'=>'done.value', 'ng-click'=>'markTask(project, task, done.value)', 'ng-checked'=>'task.done'}
+        .divider
+        .col-xs-10.content-text
+          %span.label.label-warning.pull-right{'ng-show'=>'task.deadline || task.comments.length'}
+            %span{'ng-show'=>'task.deadline', 'ng-click'=>'editTask(project, task)'}
+              due to: {{ task.deadline | date : format : timezone }}  
+            %span{'ng-show'=>'task.comments.length', 'ng-click'=>'$parent.showComments=!$parent.showComments'}
+              %span.glyphicon.glyphicon-comment
+              {{ task.comments.length }}
+          %a{'ng-click'=>'$parent.showComments=!$parent.showComments'}
+            {{ task.text }}
+
+    
+        .col-xs-2.icons-edit
+          %ul.list-inline.hide
+            %li
+              = image_tag('icon-up-down-item.fw.png')
+            %li
+              %a{'ng-click'=>'editTask(project, task)'}
+                = image_tag('icon-pensil-item.fw.png')
+            %li
+              %a{'ng-click'=>'removeTask(task)'}
+                = image_tag('icon-trash-item.fw.png')
+      %todo_task_comments

@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('todo')
-  .controller('TaskController', ['$scope', 'taskFactory', 'projectFactory', function($scope, taskFactory, projectFactory) {
+  .controller('TaskController', ['$scope', 'taskFactory', 'projectFactory', 'modalService', function($scope, taskFactory, projectFactory, modalService) {
 
     $scope.deadline = {};
-    $scope.deadline.date = '';
 
     $scope.project.tasks.sort(function(a,b) {
       var n = a.priority - b.priority;
@@ -13,10 +12,6 @@ angular.module('todo')
       }
       return b.id - a.id;
     });
-
-    $scope.alert = function(){
-      alert('alerted!');
-    };
 
     $scope.removeTask = function(task) {
       var index = $scope.project.tasks.indexOf(task);
@@ -32,8 +27,46 @@ angular.module('todo')
       $scope.deadline.date = '';
     };
 
-    $scope.updateTask = function(project, task) {
-      taskFactory.update( {project_id: project.id, id: task.id, text: task.text, deadline: $scope.deadline}, function(resource) {
+    $scope.addDeadline = function() {
+      var modalOptions = {
+        closeButtonText: 'Cancel',
+        actionButtonText: 'Add',
+        headerText: 'Add task deadline.'
+      }
+
+      var modalDefaults = {
+        animation: true,
+        templateUrl: 'assets/templates/add-deadline.html'
+      }
+
+      modalService.showModal(modalDefaults, modalOptions).then(function(result){
+        $scope.deadline.date = result;
+      })
+    }
+
+    $scope.markTask = function(project, task, doneValue) {
+      taskFactory.update( {project_id: project.id, id: task.id, done: doneValue} )
+    }
+
+    $scope.editTask = function(project, task) {
+
+      var modalOptions = {
+        closeButtonText: 'Cancel',
+        actionButtonText: 'Update',
+        headerText: 'Edit task',
+        task: task
+      }
+
+      var modalDefaults = {
+        animation: true,
+        templateUrl: 'assets/templates/edit-task.html'
+      }
+
+      modalService.showModal(modalDefaults, modalOptions).then(function(result){
+        taskFactory.update( {project_id: project.id, id: task.id, text: result.text, deadline: result.deadline} )
+          .$promise.then(function(result) {
+            task.deadline = result.deadline;
+          });
       });
     }
 
