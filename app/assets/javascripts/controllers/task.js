@@ -13,9 +13,9 @@ angular.module('todo')
       return b.id - a.id;
     });
 
-    $scope.removeTask = function(task) {
+    $scope.removeTask = function(project, task) {
       var index = $scope.project.tasks.indexOf(task);
-      taskFactory.remove({project_id: $scope.project.id, id: task.id});
+      taskFactory.remove({project_id: project.id, id: task.id});
       $scope.project.tasks.splice(index, 1);
     };
 

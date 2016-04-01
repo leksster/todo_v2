@@ -8,7 +8,9 @@ class Ability
     if user.email == 'leksster@gmail.com'
         can :manage, :all
     else
-        can :manage, Project, user: user
+        can :manage, Project,   user: user
+        can :manage, Task,      project: { user_id: user.id }
+        can :manage, Comment,   task: { project: { user_id: user.id } }
     end
     # Define abilities for the passed in user here. For example:
     #

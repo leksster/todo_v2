@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
+
   namespace :api, defaults: {format: :json} do
-    resources :projects do
-      resources :tasks do
-        resources :comments 
-      end
+    resources :projects, except: [:new, :edit] do
+      resources :tasks, only: [:index, :create, :update, :destroy]
     end
 
-    resources :comments do
-      resources :attaches
+    resources :tasks, only: [] do
+      resources :comments, only: [:index, :create, :update, :destroy]
     end
 
-    resource :attaches, only: [:create]
+    resources :comments, only: [] do
+      resources :attaches, only: [:create]
+    end
   end
 
   root 'home#index'
