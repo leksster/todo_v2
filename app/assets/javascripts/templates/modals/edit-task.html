@@ -6,7 +6,7 @@
   <div class="modal-body text-center">
     <div class="row">
       <div class="col-xs-12">
-        <input type="text" class='form-control' ng-model='modalOptions.task.text' autofocus="true" name="taskValue">
+        <input type="text" class='form-control' ng-model='modalOptions.task' autofocus="true" name="taskValue">
       </div>
     </div>
     <br>
@@ -21,7 +21,7 @@
 
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary" type="submit" ng-click="modalOptions.ok({text: modalOptions.task.text, deadline: dt})">{{modalOptions.actionButtonText}}</button>
+    <button class="btn btn-primary" ng-disabled="!modalOptions.task" type="submit" ng-click="modalOptions.ok({text: modalOptions.task, deadline: dt})">{{modalOptions.actionButtonText}}</button>
     <button class="btn btn-warning" type="button" ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>
   </div>
 </div>

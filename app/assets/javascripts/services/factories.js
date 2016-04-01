@@ -7,14 +7,6 @@ angular.module('todo')
       {
         update: {method: 'PUT'}
       });
-    // var listProjects = {};
-
-    // listProjects.getProjects = function() {
-    //   return $resource('api/projects/:id', {id: '@id'});
-    // };
-
-    // // return listProjects;
-
   }])
 
   .factory('taskFactory', ['$resource', function($resource) {
@@ -24,13 +16,6 @@ angular.module('todo')
       {
         update: {method: 'PUT'}
       });
-
-    // var listTasks = {};
-
-    // listTasks.getTasks = function() {
-    //   return $reseource('api/projects/:project_id/tasks/:id')
-    // }
-
   }])
 
   .factory('commentFactory', ['$resource', function($resource) {
@@ -39,5 +24,4 @@ angular.module('todo')
       {
         update: {method: 'PUT'}
       });
-
   }]);

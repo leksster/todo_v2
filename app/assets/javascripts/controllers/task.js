@@ -36,7 +36,7 @@ angular.module('todo')
 
       var modalDefaults = {
         animation: true,
-        templateUrl: 'assets/templates/add-deadline.html'
+        templateUrl: 'assets/templates/modals/add-deadline.html'
       }
 
       modalService.showModal(modalDefaults, modalOptions).then(function(result){
@@ -54,18 +54,19 @@ angular.module('todo')
         closeButtonText: 'Cancel',
         actionButtonText: 'Update',
         headerText: 'Edit task',
-        task: task
+        task: task.text
       }
 
       var modalDefaults = {
         animation: true,
-        templateUrl: 'assets/templates/edit-task.html'
+        templateUrl: 'assets/templates/modals/edit-task.html'
       }
 
       modalService.showModal(modalDefaults, modalOptions).then(function(result){
         taskFactory.update( {project_id: project.id, id: task.id, text: result.text, deadline: result.deadline} )
           .$promise.then(function(result) {
             task.deadline = result.deadline;
+            task.text = result.text;
           });
       });
     }

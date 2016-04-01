@@ -1,12 +1,5 @@
 class Api::CommentsController < ApplicationController
 
-  def index
-    render json: set_task.comments
-  end
-
-  def show
-  end
-
   def create
     comment = Comment.create!(comment_params)
     render json: comment, include: :attaches

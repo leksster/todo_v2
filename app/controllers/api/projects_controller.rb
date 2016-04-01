@@ -1,34 +1,32 @@
 class Api::ProjectsController < ApplicationController
+  load_and_authorize_resource
 
   def index
-    render json: Project.all, include: { tasks: { include: { comments: { include: :attaches} } } } # ???
+    render json: @projects, include: { tasks: { include: { comments: { include: :attaches} } } }
   end
 
   def show
-    render json: set_project
+    render json: @project
   end
 
   def create
-    project = Project.create!(project_params)
-    render json: project, include: { tasks: { include: { comments: { include: :attaches} } } }
+    current_user.projects << @project
+    render json: @project, include: { tasks: { include: { comments: { include: :attaches} } } }
   end
 
   def update
-    set_project.update(project_params)
-    render json: set_project
+    @project.update(project_params)
+    render json: @project
   end
 
   def destroy
-    set_project.destroy
+    @project.destroy
     render nothing: true
   end
 
   private
-  def set_project
-    @project = Project.find(params[:id])
-  end
 
   def project_params
-    params.require(:project).permit(:id, :name, :tasks)
+    params.require(:project).permit(:name)
   end
 end

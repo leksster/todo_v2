@@ -10,7 +10,7 @@
             %button.btn.btn-default.datepick{type: 'button', 'ng-click'=>'addDeadline()'}
               %span.glyphicon.glyphicon-calendar
               {{deadline.date | date : format : timezone}}
-            %button.btn.btn-default.submit{type: 'submit', 'ng-click' => 'createTask(project)'}
+            %button.btn.btn-default.submit{type: 'submit', 'ng-click' => 'createTask(project)', 'ng-disabled'=>'!newTask'}
               Add Task
 
   .sort{'data-as-sortable'=>'dragControlListeners', 'data-ng-model'=>'project.tasks'}

@@ -3,4 +3,6 @@ class Task < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   validates :text, presence: true
+
+  delegate :user, :to => :project, :allow_nil => true
 end

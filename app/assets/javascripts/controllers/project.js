@@ -34,10 +34,7 @@ angular.module('todo')
       }
 
       var modalDefaults = {
-        backdrop: true,
-        keyboard: true,
-        modalFade: true,
-        templateUrl: 'assets/templates/new-project.html',
+        templateUrl: 'assets/templates/modals/new-project.html',
       }
 
       modalService.showModal(modalDefaults, modalOptions).then(function(result){
@@ -45,6 +42,11 @@ angular.module('todo')
           $scope.projects.push(result);
         });
       });
+    }
 
+    $scope.validateName = function(data) {
+      if (data == '') {
+        return ' ';
+      }
     }
   }])

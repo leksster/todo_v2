@@ -3,9 +3,6 @@
 angular.module('todo')
   .controller('CommentController', ['$scope', 'commentFactory', '$timeout', function($scope, commentFactory, $timeout) {
 
-    // $scope.message = "Loading...";
-    // $scope.showData = false;
-
     $scope.createComment = function(project, task) {
       commentFactory.save({ project_id: project.id, task_id: task.id, text: $scope.newCommentText }, function(resource) {
         $scope.task.comments.push(resource);
@@ -27,8 +24,9 @@ angular.module('todo')
       return url.split("/").pop();
     };
 
-    // $scope.updateProject = function(project) {
-    //   projectFactory.update({id: project.id, name: project.name}, function(resource) {
-    //   });
-    // };
+    $scope.validateText = function(data) {
+      if (data == '') {
+        return ' ';
+      }
+    };
   }])

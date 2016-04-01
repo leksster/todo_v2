@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'devise'
+gem 'cancancan'
 gem 'angular_rails_csrf'
 
 gem 'carrierwave'

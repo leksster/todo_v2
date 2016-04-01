@@ -7,7 +7,7 @@
   .row{'ng-repeat'=> 'comment in task.comments | orderBy: "id"'}
     .col-xs-12        
       %blockquote
-        %p{'editable-text'=>'comment.text', 'e-form'=>'editComment', 'onaftersave'=>'updateComment(project, task, comment)'} 
+        %p{'editable-text'=>'comment.text', 'e-form'=>'editComment', 'onaftersave'=>'updateComment(project, task, comment)', 'onbeforesave'=>'validateText($data)'} 
           {{ comment.text }}
           %span.pull-right.delete.hide
             %a{'ng-click'=>'removeComment(project, task, comment)'}
@@ -45,5 +45,5 @@
             %span{'ng-show'=>'file.result'}Upload Successfuel
             %span.err{'ng-show'=>'errorMsg'}{{errorMsg}}
 
-            %button.btn.btn-primary.submit{type: 'submit', 'ng-click' => 'uploadPic(file, task, project)'}                  
+            %button.btn.btn-primary.submit{type: 'submit', 'ng-click' => 'uploadPic(file, task, project)', 'ng-disabled'=> '!newCommentText'}                  
               Add Comment

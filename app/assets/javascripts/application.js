@@ -22,6 +22,3 @@
 //= require ng-file-upload/ng-file-upload
 //= require angular-rails-templates
 //= require_tree .
-//= require controllers/project
-//= require services/models
-
