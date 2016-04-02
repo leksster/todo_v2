@@ -9,7 +9,7 @@ angular.module('todo').controller('DatepickerDemoCtrl', function ($scope) {
   };
 
   $scope.inlineOptions = {
-    customClass: getDayClass,
+    // customClass: getDayClass,
     minDate: new Date(),
     showWeeks: true
   };

@@ -22,7 +22,7 @@
             {{ urlToName(attach.file.url) }}
       %hr
   .row
-    .col-xs-12{'ng-controller'=>'UploadCtrl'}
+    .col-xs-12
       %form{'name'=>'uploadForm'}
         .row
           .form-group
@@ -45,5 +45,5 @@
             %span{'ng-show'=>'file.result'}Upload Successfuel
             %span.err{'ng-show'=>'errorMsg'}{{errorMsg}}
 
-            %button.btn.btn-primary.submit{type: 'submit', 'ng-click' => 'uploadPic(file, task, project)', 'ng-disabled'=> '!newCommentText'}                  
+            %button.btn.btn-primary.submit{type: 'submit', 'ng-click' => 'createComment(file, task, project)', 'ng-disabled'=> '!newCommentText'}                  
               Add Comment

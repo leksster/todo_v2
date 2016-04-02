@@ -10,9 +10,9 @@ Rails.application.routes.draw do
       resources :comments, only: [:index, :create, :update, :destroy]
     end
 
-    resources :comments, only: [] do
-      resources :attaches, only: [:create]
-    end
+    # resources :comments, only: [] do
+    #   resources :attaches, only: [:create]
+    # end
   end
 
   root 'home#index'
