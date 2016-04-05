@@ -5,11 +5,3 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-Project.destroy_all
-
-
-3.times { |n| Project.create(name: "Lorem ipsum dolor_#{n}") }
-
-5.times { |n| Task.create(text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, corporis._#{n}", project: Project.first) }
-3.times { |n| Task.create(text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, corporis._#{n}", project: Project.last) }
