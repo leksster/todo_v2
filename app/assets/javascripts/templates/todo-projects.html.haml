@@ -8,9 +8,13 @@
     .col-xs-2.col-sm-2
       %ul.list-inline.top-icons.pull-right.hide
         %li
-          %a{'ng-click'=>'editProject.$show()', 'ng-hide'=>'editProject.$visible'} 
+          %a.editProject{'ng-click'=>'editProject.$show()', 'ng-hide'=>'editProject.$visible'} 
             = image_tag('icon-pensil-top.fw.png')
         %li
-          %a{'ng-click'=>'removeProject(project)'}
+          %a.removeProject{'ng-click'=>'removeProject(project)'}
             = image_tag('icon-trash-top.fw.png')
   %todo_project_tasks
+  .row.owner
+    %div
+      %p.text-center
+        © {{ project.owner }}

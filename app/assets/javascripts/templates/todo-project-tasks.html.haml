@@ -5,7 +5,7 @@
     .col-xs-12.col-sm-12
       %form{:name=>'taskForm', :novalidate=>''}
         .input-group
-          %input.form-control{type: 'text', placeholder: 'Start typing here to create a task...', 'ng-model' => 'newTask', required: ''}
+          %input.form-control{name: 'taskText', type: 'text', placeholder: 'Start typing here to create a task...', 'ng-model' => 'newTask', required: ''}
           %span.input-group-btn
             %button.btn.btn-default.datepick{type: 'button', 'ng-click'=>'addDeadline()'}
               %span.glyphicon.glyphicon-calendar
@@ -35,9 +35,9 @@
             %li
               = image_tag('icon-up-down-item.fw.png')
             %li
-              %a{'ng-click'=>'editTask(project, task)'}
+              %a.editTask{'ng-click'=>'editTask(project, task)'}
                 = image_tag('icon-pensil-item.fw.png')
             %li
-              %a{'ng-click'=>'removeTask(project, task)'}
+              %a.removeTask{'ng-click'=>'removeTask(project, task)'}
                 = image_tag('icon-trash-item.fw.png')
       %todo_task_comments

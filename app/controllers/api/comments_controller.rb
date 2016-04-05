@@ -1,28 +1,24 @@
 class Api::CommentsController < ApplicationController
   load_and_authorize_resource :task
-  load_and_authorize_resource :through => :task
-
-  def index
-    render json: @comments
-  end
+  load_and_authorize_resource :comment, :through => :task
 
   def create
     @comment.save
-    render json: @comment, include: :attaches
+    render :show
   end
 
   def update
     @comment.update(comment_params)
-    render nothing: true, status: 204
+    render nothing: true
   end
 
   def destroy
     @comment.destroy
-    render nothing: true, status: 204
+    render nothing: true
   end
 
   private
   def comment_params
-    params.require(:comment).permit(:text, :task_id, :attaches_attributes => [:id, :file])
+    params.require(:comment).permit(:text, :attaches_attributes => [:id, :file])
   end
 end

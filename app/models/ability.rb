@@ -9,8 +9,8 @@ class Ability
         can :manage, :all
     else
         can :manage, Project,   user: user
-        can :manage, Task,      project: { user_id: user.id }
-        can :manage, Comment,   task: { project: { user_id: user.id } }
+        can :manage, Task,      project: { user: user }
+        can :manage, Comment,   task: { project: { user: user } }
     end
     # Define abilities for the passed in user here. For example:
     #

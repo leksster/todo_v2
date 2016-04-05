@@ -2,21 +2,19 @@ class Api::ProjectsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    render json: @projects, include: { tasks: { include: { comments: { include: :attaches} } } }
   end
 
   def show
-    render json: @project
   end
 
   def create
     current_user.projects << @project
-    render json: @project, include: { tasks: { include: { comments: { include: :attaches} } } }
+    render :show
   end
 
   def update
     @project.update(project_params)
-    render json: @project
+    render :show
   end
 
   def destroy

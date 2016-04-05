@@ -3,11 +3,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resources :projects, except: [:new, :edit] do
-      resources :tasks, only: [:index, :create, :update, :destroy]
+      resources :tasks, only: [:create, :update, :destroy]
     end
 
     resources :tasks, only: [] do
-      resources :comments, only: [:index, :create, :update, :destroy]
+      resources :comments, only: [:create, :update, :destroy]
     end
 
     # resources :comments, only: [] do

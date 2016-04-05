@@ -1,14 +1,26 @@
 require 'rails_helper'
+require 'cancan/matchers'
 
 RSpec.describe Api::ProjectsController, type: :controller do
+  render_views
+  let(:user) { create(:user) }
+
+  before do
+    sign_in user
+    allow(controller).to receive(:current_user).and_return(user)
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(@controller).to receive(:current_ability).and_return(@ability)
+    @ability.can :manage, :all
+  end
 
   describe "Projects API" do
-    let(:project) { create(:project) }
+    let(:project) { create(:project, user_id: user.id) }
 
     context "GET #index" do
 
       before do 
-        @project = create(:project)
+        project
         get :index, format: :json
       end
 
@@ -16,69 +28,93 @@ RSpec.describe Api::ProjectsController, type: :controller do
         expect(response).to have_http_status(200)
       end
 
-      it "returns a list" do
-        expect(json).to be_an(Array)
+      it "renders :index template" do
+        expect(response).to render_template(:index)
       end
 
-      it "returns proper list of projects" do
-        expect(json).to include(include('name' => "#{@project.name}"))
-        expect(json).to include(include('tasks'))
+      it "assigns @projects" do
+        expect(assigns(:projects)).to eq([project])
       end
     end
 
     context "GET #show" do
       before do        
-        get :show, {:id => project.id}
+        get :show, {:id => project.id, format: :json}
       end
 
       it "returns http success" do
         expect(response).to have_http_status(200)
       end
 
-      it "returns a specific project" do
-        expect(json['name']).to eq(project.name)
+      it "renders :show template" do
+        expect(response).to render_template(:show)
+      end
+
+      it "assigns @project" do
+        expect(assigns(:project)).to eq(project)
       end
     end
 
     context "POST #create" do
-      before do
-        puts attributes_for(:project)
-        post :create, format: :json, project: attributes_for(:project)
-      end
+
+      let(:req) { post :create, {format: :json, project: attributes_for(:project)} }
 
       it "returns http success" do
+        req
         expect(response).to have_http_status(200)
       end
 
-      it "returns created project" do
-        expect(json).to include('name'=> Project.first.name)
-        expect(json).to include('tasks'=> Project.first.tasks)
+      it "create Project" do
+        expect{req}.to change(Project, :count).by(1)
+      end
+
+      it "creates Project for current_user" do    
+        expect{req}.to change(user.projects, :count).by(1)
+      end
+
+      it "renders :show" do
+        req
+        expect(response).to render_template(:show)
       end
     end
 
     context "PUT #update" do
       before do
-        @project = create(:project)
-        
+        project
+        put :update, format: :json, id: project, project: attributes_for(:project)
       end
 
       it "returns http success" do
-        put :update, format: :json, id: @project.id, project: {id: @project.id}
         expect(response).to have_http_status(200)
+      end
+
+      it "locates the requested project" do
+        expect(assigns(:project).id).to eq(project.id)
+      end
+
+      it "renders :show" do
+        expect(response).to render_template(:show)
       end
     end
 
     context "DELETE #destroy" do
-      before do
-        delete :destroy, format: :json, id: project.id
-      end
+
+      before { project }
+
+      let(:req) { delete :destroy, format: :json, id: project.id }
 
       it "returns http success" do
+        req
         expect(response).to have_http_status(200)
       end
 
       it "renders nothing" do
+        req
         expect(response.body).to be_blank
+      end
+
+      it "deletes the project" do
+        expect{req}.to change(Project, :count).by(-1)
       end
     end
 
