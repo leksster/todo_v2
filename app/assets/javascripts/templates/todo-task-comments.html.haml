@@ -10,10 +10,10 @@
         %p{'editable-text'=>'comment.text', 'e-form'=>'editComment', 'onaftersave'=>'updateComment(project, task, comment)', 'onbeforesave'=>'validateText($data)'} 
           {{ comment.text }}
           %span.pull-right.delete.hide
-            %a{'ng-click'=>'removeComment(project, task, comment)'}
+            %a.removeComment{'ng-click'=>'removeComment(project, task, comment)'}
               = image_tag('icon-trash-item.fw.png')                        
           %span.pull-right.delete.hide
-            %a{'ng-click'=>'editComment.$show()', 'ng-hide'=>'editComment.$visible'}
+            %a.updateComment{'ng-click'=>'editComment.$show()', 'ng-hide'=>'editComment.$visible'}
               = image_tag('icon-pensil-item.fw.png')
           %span.pull-right.date
             {{ comment.created_at | date : format : timezone }}

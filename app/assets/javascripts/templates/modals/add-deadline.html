@@ -9,9 +9,10 @@
         <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
       </div>
   </div>
+  {{task.date}}
   <div class="modal-footer">
       <button class="btn btn-primary" type="submit" ng-click="modalOptions.ok(dt)">{{modalOptions.actionButtonText}}</button>
-      <button class="btn btn-warning" type="button" ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>
+      <button class="btn btn-warning" type="button" ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>   
   </div>
 </div>
 </form>
