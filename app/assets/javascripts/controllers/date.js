@@ -1,8 +1,6 @@
 angular.module('todo').controller('DatepickerDemoCtrl', function ($scope) {
   $scope.dt = null;
 
-  console.log($scope);
-
   $scope.inlineOptions = {
     minDate: new Date(),
     showWeeks: true

@@ -73,7 +73,7 @@ angular.module('todo')
 
     $scope.dragControlListeners = {
       accept: function (sourceItemHandleScope, destSortableScope) {
-        return true;
+        return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
       },
       itemMoved: function () {
         projectFactory.update( {id:$scope.project.id, tasks: $scope.project.tasks}, function(resource){
