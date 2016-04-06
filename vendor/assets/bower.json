@@ -8,6 +8,11 @@
     "angular-loading-bar": "latest",
     "angular-resource": "latest",
     "ng-sortable": "latest",
-    "ng-file-upload": "latest"
+    "ng-file-upload": "latest",
+    "ng-token-auth": "latest",
+    "angular-ui-router": "latest",
+    "angular-ui-notification": "latest",
+    "angular-route": "latest",
+    "angular-cookies": "latest"
   }
 }

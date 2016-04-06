@@ -1,0 +1,24 @@
+.container.main{'ng-controller'=>'ProjectController'}
+  %h1.text-center SIMPLE TODO LISTS
+  %p.text-center FROM RUBY GARAGE
+  
+  .col-xs-12.text-center{'ng-if'=>'!showData'}
+    %h6
+      {{ message }}
+      
+  %todo_projects
+  {{ user.email }}
+  .row
+    .col-xs-12.center-block.add-list-button
+      %button.btn.btn-primary.main_button{'ng-click'=>'newProject()'}
+        = image_tag('icon-plus-blue.fw.png')
+        Add TODO List
+
+      %button.btn.btn-primary.main_button{'ng-click'=>'signOut()'}
+        = image_tag('icon-plus-blue.fw.png')
+        Logout
+
+  .row
+    .col-xs-12
+      %br
+      %br

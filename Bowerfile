@@ -11,3 +11,10 @@ asset 'angular-loading-bar'
 asset 'angular-resource'
 asset 'ng-sortable'
 asset 'ng-file-upload'
+asset 'ng-token-auth'
+asset 'angular-ui-router'
+asset 'angular-ui-notification'
+
+
+asset 'angular-route'
+asset 'angular-cookies'

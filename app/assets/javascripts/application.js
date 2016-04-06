@@ -19,6 +19,13 @@
 //= require ng-sortable/dist/ng-sortable
 //= require angular-loading-bar/build/loading-bar
 //= require angular-resource/angular-resource
+//= require angular-cookie/angular-cookie
+//= require angular-ui-notification/dist/angular-ui-notification
+//= require angular-ui-router/release/angular-ui-router
 //= require ng-file-upload/ng-file-upload
 //= require angular-rails-templates
+//= require ng-token-auth/dist/ng-token-auth
 //= require_tree .
+
+//= require angular-route/angular-route
+//= require angular-cookies/angular-cookies
