@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  mount_devise_token_auth_for 'User', at: 'auth'
+  # devise_for :users
 
   namespace :api, defaults: {format: :json} do
     resources :projects, except: [:new, :edit] do

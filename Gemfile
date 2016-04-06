@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'omniauth-facebook'
 gem 'devise'
+gem 'devise_token_auth'
 
 gem 'cancancan'
 gem 'angular_rails_csrf'
