@@ -7,10 +7,9 @@ feature "Visiting the homepage", js: true do
   let(:task) {create(:task, project: project)}
 
   background do
-    login_as(user)
+    login(user)
     project
     task
-    visit root_path
   end
 
   scenario "User can CREATE Tasks" do

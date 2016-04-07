@@ -15,6 +15,6 @@
             = image_tag('icon-trash-top.fw.png')
   %todo_project_tasks
   .row.owner
-    %div
+    %div{{'ng-show'=> 'user.email'}}
       %p.text-center
         © {{ project.owner }}

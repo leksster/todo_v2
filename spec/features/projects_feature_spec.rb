@@ -6,9 +6,8 @@ feature "Visiting the homepage", js: true do
   let(:project) {create(:project, user: user)}
 
   background do
-    login_as(user)
     project
-    visit root_path
+    login(user)
   end
 
   scenario "User can CREATE Projects" do

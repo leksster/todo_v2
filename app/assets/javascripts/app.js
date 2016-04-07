@@ -12,7 +12,7 @@ angular
     "ui.router",
     "ui-notification"])
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $authProvider) {
     $urlRouterProvider.otherwise("/");
 
     $stateProvider
@@ -32,11 +32,18 @@ angular
         url: '/',
         templateUrl: 'assets/templates/index.html.haml',
         resolve: {
-          auth: function($auth) {
-            return $auth.validateUser();
+          auth: function($auth, $state) {
+            return $auth.validateUser()
+              .catch(function(response) {
+                $state.go('login');
+              });
           }
         }
       })
+      
+    $authProvider.configure({
+      apiUrl: ''
+    })
     // $routeProvider
     //   .when('/', {
     //     templateUrl: 'assets/templates/sessions/new.html',
