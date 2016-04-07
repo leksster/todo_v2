@@ -3,10 +3,17 @@
   %h1.text-center SIMPLE TODO LISTS
   %p.text-center FROM RUBY GARAGE
 
-  .row
-    %p{'ng-show'=>'user.image'}
+  .row.text-center
+    %p{'ng-if'=>'user.image'}
       %img{'ng-src'=>'{{user.image}}'}
+      %br
       {{user.name}}
+      %br
+      %button.btn.btn-danger.main_button{'ng-controller'=>'UserSessionsCtrl','ng-click'=>'signOut()'}
+        Logout
+    %p{'ng-if'=>'!user.image'}
+      {{ user.email }}
+      %br
       %button.btn.btn-danger.main_button{'ng-controller'=>'UserSessionsCtrl','ng-click'=>'signOut()'}
         Logout
   

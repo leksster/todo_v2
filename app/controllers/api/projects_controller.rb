@@ -1,5 +1,4 @@
 class Api::ProjectsController < ApplicationController
-  before_action :authenticate_user!
   load_and_authorize_resource :project
 
   def index
@@ -9,8 +8,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    @project.user = current_user
-    @project.save
+    current_user.projects << @project
     render :show
   end
 
