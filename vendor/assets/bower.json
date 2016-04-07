@@ -12,6 +12,7 @@
     "ng-token-auth": "latest",
     "angular-ui-router": "latest",
     "angular-ui-notification": "latest",
+    "bootstrap-social": "latest",
     "angular-route": "latest",
     "angular-cookies": "latest"
   }
