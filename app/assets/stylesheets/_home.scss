@@ -9,6 +9,18 @@ body {
   max-width: 700px;
 }
 
+.title {
+  h1 {
+    font-weight: bold;
+    text-shadow: 0 1px 0 #eaeaea;
+  }
+
+  h4 {
+    text-shadow: 0 1px 0 #eaeaea;
+  }
+  
+}
+
 .project {
   padding-top: 20px;
 }
@@ -189,6 +201,9 @@ body {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom: 1px solid #aaafa4;
+    -webkit-box-shadow: 0px 5px 10px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 10px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 10px -6px rgba(0,0,0,0.75);
   }
 }
 
