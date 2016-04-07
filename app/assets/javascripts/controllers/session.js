@@ -9,5 +9,10 @@ angular.module('todo')
     $scope.$on('auth:login-error', function(ev, reason) {
       Notification.error({message: reason.errors[0], positionY: 'bottom'});
     })
+
+    $scope.$on('auth:logout-success', function(ev) {
+      Notification({message: 'Bye.', positionY: 'bottom'});
+      $state.go('login');
+    })
     
   }]);

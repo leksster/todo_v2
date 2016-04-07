@@ -1,7 +1,9 @@
 <!-- client/app/views/user_sessions/new.html -->
 <div class="container">
   <div class="row">
-    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+    <div class="col-sm-offset-4 col-sm-4 col-sm-offset-4 text-center">
+      <h1>Sign In</h1>
+      <br>
       <form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
         <div class="form-group">
           <label for="email">Email</label>
@@ -22,14 +24,15 @@
                  required="required"
                  class="form-control">
         </div>
+        <div class="todo-buttons block-center">
+          <button type="submit" class="btn btn-primary">Sign in</button><br>
+          <a href="#/register" class="btn btn-primary">Sign up</a><br>
+          <a href="#/register" class="btn btn-primary">Facebook</a>
+        </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-        <a href="#/register" class="btn btn-primary btn-block">Sign up</a>
-        <a href="#/register" class="btn btn-primary btn-block">Facebook</a>
       </form> 
     </div>
   </div>
-
 </div>
 
 

@@ -10,13 +10,12 @@
   %todo_projects
   
   .row
-    .col-xs-12.center-block.add-list-button
+    .col-xs-12.center-block.todo-buttons
       %button.btn.btn-primary.main_button{'ng-click'=>'newProject()'}
         = image_tag('icon-plus-blue.fw.png')
         Add TODO List
 
-      %button.btn.btn-primary.main_button{'ng-click'=>'signOut()'}
-        = image_tag('icon-plus-blue.fw.png')
+      %button.btn.btn-primary.main_button{'ng-controller'=>'UserSessionsCtrl','ng-click'=>'signOut()'}
         Logout
 
   .row
