@@ -2,22 +2,16 @@ Rails.application.routes.draw do
   # devise_for :users
   mount_devise_token_auth_for 'User', at: 'auth'
 
-  namespace :api, defaults: {format: :json} do
-
-    
-    
-    resources :projects, except: [:new, :edit] do
-      resources :tasks, only: [:create, :update, :destroy]
+  shallow do
+    namespace :api, defaults: {format: :json} do
+      resources :projects, except: [:new, :edit] do
+        resources :tasks, only: [:create, :update, :destroy] do
+          resources :comments, only: [:create, :update, :destroy]
+        end
+      end
     end
-
-    resources :tasks, only: [] do
-      resources :comments, only: [:create, :update, :destroy]
-    end
-
-    # resources :comments, only: [] do
-    #   resources :attaches, only: [:create]
-    # end
   end
+
 
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.

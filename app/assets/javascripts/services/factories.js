@@ -11,17 +11,17 @@ angular.module('todo')
 
   .factory('taskFactory', ['$resource', function($resource) {
 
-    return $resource('api/projects/:project_id/tasks/:id', 
-      {project_id: '@project_id', id: '@id'},
+    return $resource('api/tasks/:id', {project_id: '@project_id', id: '@id'},
       {
-        update: {method: 'PUT'}
+        update: {method: 'PUT'},
+        save:   {method: 'POST', url: 'api/projects/:project_id/tasks' }
       });
   }])
 
   .factory('commentFactory', ['$resource', function($resource) {
-    return $resource('api/tasks/:task_id/comments/:id', 
-      {task_id: '@task_id', id: '@id'},
+    return $resource('api/comments/:id', {task_id: '@task_id', id: '@id'},
       {
+        save:   {method: 'POST', url: 'api/tasks/:task_id/comments'},
         update: {method: 'PUT'}
       });
   }]);
