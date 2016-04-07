@@ -2,6 +2,13 @@
   
   %h1.text-center SIMPLE TODO LISTS
   %p.text-center FROM RUBY GARAGE
+
+  .row
+    %p{'ng-show'=>'user.image'}
+      %img{'ng-src'=>'{{user.image}}'}
+      {{user.name}}
+      %button.btn.btn-danger.main_button{'ng-controller'=>'UserSessionsCtrl','ng-click'=>'signOut()'}
+        Logout
   
   .col-xs-12.text-center{'ng-if'=>'!showData'}
     %h6
@@ -14,9 +21,6 @@
       %button.btn.btn-primary.main_button{'ng-click'=>'newProject()'}
         = image_tag('icon-plus-blue.fw.png')
         Add TODO List
-
-      %button.btn.btn-primary.main_button{'ng-controller'=>'UserSessionsCtrl','ng-click'=>'signOut()'}
-        Logout
 
   .row
     .col-xs-12

@@ -1,4 +1,5 @@
 class Api::ProjectsController < ApplicationController
+  before_action :authenticate_user!
   load_and_authorize_resource :project
 
   def index

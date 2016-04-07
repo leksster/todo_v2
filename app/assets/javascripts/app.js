@@ -42,28 +42,12 @@ angular
       })
       
     $authProvider.configure({
-      apiUrl: ''
+      apiUrl: '',
+      authProviderPaths: {
+        facebook: 'auth/facebook'
+      },
+      omniauthWindowType: 'newWindow'
     })
-    // $routeProvider
-    //   .when('/', {
-    //     templateUrl: 'assets/templates/sessions/new.html',
-    //     controller: 'UserSessionsCtrl',
-    //   })
-    //   .when('/projects', {
-    //     templateUrl: 'assets/templates/index.html.haml',
-    //     resolve: {
-    //       auth: function($auth) {
-    //         return $auth.validateUser();
-    //       }
-    //     }
-    //   })
-    //   .when('/register', {
-    //     templateUrl: 'assets/templates/registraions/new.html',
-    //     controller: 'UserSessionsCtrl'
-    //   })
-    //   .otherwise({
-    //     redirectTo: '/'
-    //   });
   })
 
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
