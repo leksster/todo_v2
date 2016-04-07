@@ -19,6 +19,7 @@
         .check-box
           %input{type: 'checkbox', 'ng-model'=>'done.value', 'ng-click'=>'markTask(project, task, done.value)', 'ng-checked'=>'task.done'}
         .divider
+        
         .col-xs-10.content-text
           %span.label.label-warning.pull-right{'ng-show'=>'task.deadline || task.comments.length'}
             %span{'ng-show'=>'task.deadline', 'ng-click'=>'editTask(project, task)'}
@@ -28,7 +29,6 @@
               {{ task.comments.length }}
           %a{'ng-click'=>'$parent.showComments=!$parent.showComments'}
             {{ task.text }}
-
     
         .col-xs-2.icons-edit
           %ul.list-inline.hide
@@ -40,4 +40,5 @@
             %li
               %a.removeTask{'ng-click'=>'removeTask(project, task)'}
                 = image_tag('icon-trash-item.fw.png')
+
       %todo_task_comments

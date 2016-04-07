@@ -13,7 +13,9 @@
         %li
           %a.removeProject{'ng-click'=>'removeProject(project)'}
             = image_tag('icon-trash-top.fw.png')
+
   %todo_project_tasks
+  
   .row.owner
     %div{{'ng-show'=> 'user.email'}}
       %p.text-center

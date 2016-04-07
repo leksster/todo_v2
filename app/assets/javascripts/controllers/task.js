@@ -54,7 +54,7 @@ angular.module('todo')
         closeButtonText: 'Cancel',
         actionButtonText: 'Update',
         headerText: 'Edit task',
-        task: task.text
+        task: task
       }
 
       var modalDefaults = {
