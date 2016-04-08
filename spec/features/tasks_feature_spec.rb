@@ -12,6 +12,8 @@ feature "Visiting the homepage", js: true do
     task
   end
 
+  after { visit '/'; Capybara.reset_session! }
+
   scenario "User can CREATE Tasks" do
     taskText = Faker::Hipster.sentence(7)
     within('.form-box') do
@@ -22,6 +24,7 @@ feature "Visiting the homepage", js: true do
   end
 
   scenario "User can READ Tasks" do
+    sleep(3)
     expect(page).to have_content(project.name)
     expect(page).to have_content(task.text)
   end
@@ -42,6 +45,7 @@ feature "Visiting the homepage", js: true do
   scenario "User can DELETE Tasks" do
     find('.content-box').hover
     find('.removeTask').click
+    sleep(3)
     expect(page).not_to have_content(task.text)
   end
 end

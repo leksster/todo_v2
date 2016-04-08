@@ -4,7 +4,6 @@ class Api::TasksController < ApplicationController
 
   def create
     @task.save
-    p @task.deadline
     render :show
   end
 

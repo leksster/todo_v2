@@ -58,6 +58,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
+  gem 'poltergeist'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

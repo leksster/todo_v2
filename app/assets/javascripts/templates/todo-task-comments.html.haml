@@ -29,8 +29,8 @@
             %input.form-control{type:'text', placeholder: 'Comment text...', :autofocus=>'', 'ng-model'=> 'newCommentText'}
         .row
           .form-group
-            %span.btn.btn-default.btn-file
-              %input.filestyle{type: 'file', 'ngf-select'=>'', 'ng-model'=>'file', 'ngf-max-size'=>'30MB', 'ngf-model-invalid'=>'errorFile'}
+            %span.btn.btn-default.btn-file.delme
+              %input.filestyle#attach{type: 'file', 'ngf-select'=>'', 'ng-model'=>'file', 'ngf-max-size'=>'30MB', 'ngf-model-invalid'=>'errorFile'}
                 Attach file
               %i{'ng-show'=>'uploadForm.file.$error.maxSize'} File too large {{errorFile.size/ 1000000|number:1}}MB: max 2M
             {{ file.name }}

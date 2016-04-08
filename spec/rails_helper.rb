@@ -7,10 +7,14 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'faker'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 require 'selenium-webdriver'
 require_relative 'support/requests_helpers.rb'
 
-Capybara.default_driver = :selenium
+# Capybara.default_driver = :selenium
+
+Capybara.javascript_driver = :poltergeist
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -33,6 +37,7 @@ Capybara.default_driver = :selenium
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  Warden.test_mode!
   config.include Devise::TestHelpers, type: :controller
   config.include Warden::Test::Helpers
   #JSON parse helper
@@ -68,9 +73,15 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
-    Warden.test_mode!
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each) do

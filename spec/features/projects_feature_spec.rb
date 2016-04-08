@@ -6,9 +6,11 @@ feature "Visiting the homepage", js: true do
   let(:project) {create(:project, user: user)}
 
   background do
-    project
     login(user)
+    project
   end
+
+  after { visit '/'; Capybara.reset_session! }
 
   scenario "User can CREATE Projects" do
     projectName = Faker::Hipster.sentence(5)
@@ -19,6 +21,7 @@ feature "Visiting the homepage", js: true do
   end
 
   scenario "User can READ Projects" do
+    sleep(3)
     expect(page).to have_content(project.name)
   end
 

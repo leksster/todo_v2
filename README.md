@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/leksster/todo_v2.svg?branch=master)](https://travis-ci.org/leksster/todo_v2)
+
 ## Task manager
 
 You are a person who passionate about own productivity. You want to manage your tasks and projects more effectively. You need a simple tool that supports you in controlling your task-flow.
