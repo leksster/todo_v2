@@ -38,6 +38,7 @@ body {
   background-image: url('background-title-full.fw2.png');
   background-size: cover;
   border: 1px solid #315589;
+  word-break: break-all;
 
   a {
     color: #fff;
@@ -266,6 +267,7 @@ body {
   }
 
   blockquote {
+    word-break: break-all;
     margin: 0;
     font-size: 12px;
   }
