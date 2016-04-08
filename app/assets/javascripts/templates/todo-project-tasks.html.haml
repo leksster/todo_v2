@@ -17,7 +17,7 @@
     .tasks{'ng-repeat'=>"task in project.tasks", 'data-as-sortable-item'=>''}
       .row.content-box{'data-as-sortable-item-handle'=>''}
         .check-box
-          %input{type: 'checkbox', 'ng-model'=>'done.value', 'ng-click'=>'markTask(project, task, done.value)', 'ng-checked'=>'task.done'}
+          %input{type: 'checkbox', 'ng-model'=>'task.done', 'ng-click'=>'markTask(project, task, task.done)', 'ng-checked'=>'task.done'}
         .divider
         
         .col-xs-10.content-text
@@ -27,12 +27,12 @@
             %span{'ng-show'=>'task.comments.length', 'ng-click'=>'$parent.showComments=!$parent.showComments'}
               %span.glyphicon.glyphicon-comment
               {{ task.comments.length }}
-          %a{'ng-click'=>'$parent.showComments=!$parent.showComments'}
-            {{ task.text }}
-    
+          %a{'ng-click'=>'$parent.showComments=!$parent.showComments', 'ng-class'=>'{ decorate: task.done }'}
+            {{ task.text }}    
         .col-xs-2.icons-edit
           %ul.list-inline.hide
             %li
+              %a
               = image_tag('icon-up-down-item.fw.png')
             %li
               %a.editTask{'ng-click'=>'editTask(project, task)'}

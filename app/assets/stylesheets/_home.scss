@@ -167,6 +167,24 @@ body {
     padding-left: 30px;
     padding-right: 15px;
     border-right: 1px solid #e7ebea;
+    word-break: break-all;
+
+    a {
+      text-decoration: none;
+      font-size: 13px;
+      color: #999999;
+      font-weight: bold;
+    }
+
+    .decorate {
+      text-decoration: line-through;
+      color: #ccc;
+    }
+
+    a:hover {
+      border-bottom: #999999 1px dotted;
+    }
+
   }
 
   ul {
@@ -176,17 +194,9 @@ body {
   .icons-edit {
     text-align: center;
     min-width: 102px;
-  }
-  .content-text {
-    a {
-      text-decoration: none;
-      font-size: 13px;
-      color: #999999;
-      font-weight: bold;
-    }
 
-    a:hover {
-      border-bottom: #999999 1px dotted;
+    li:first-child:hover {
+      cursor: move;
     }
   }
 
@@ -196,6 +206,8 @@ body {
   }
 
 }
+
+
 
 .sort > .tasks:last-child {
   .content-text {

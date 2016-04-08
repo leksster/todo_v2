@@ -40,6 +40,7 @@ angular.module('todo')
       }
 
       modalService.showModal(modalDefaults, modalOptions).then(function(result){
+        result.setHours(12);
         $scope.deadline.date = result;
       })
     }
