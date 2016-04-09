@@ -11,6 +11,8 @@ before_install:
 
 addons:
   postgresql: "9.4"
+  code_climate:
+    repo_token: 91d4806f0f5f01a3acb85a5a4afc251e7136b81a74c12f139a9a7d0661bfbcc7
 
 services:
   -postgresql

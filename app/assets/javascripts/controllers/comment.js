@@ -13,7 +13,7 @@ angular.module('todo')
               task_id: task.id,
               attaches_attributes: [{file: file}]
             }        
-          },
+          }
         });
 
         file.upload.then(function (response) {
@@ -26,27 +26,27 @@ angular.module('todo')
 
         }, function (response) {
           if (response.status > 0)
-            $scope.errorMsg = response.status + ': ' + 'Error';
+            $scope.errorMsg = response.status + ': Error';
         }, function (evt) {
           // Math.min is to fix IE which reports 200% sometimes
           file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
         });
       } else {
-        commentFactory.save({ project_id: project.id, task_id: task.id, text: $scope.newCommentText }, function(resource) {
+        commentFactory.save({ task_id: task.id, text: $scope.newCommentText }, function(resource) {
           $scope.task.comments.push(resource);
           $scope.newCommentText = '';
         });
       }
     };
 
-    $scope.removeComment = function(project, task, comment) {
+    $scope.removeComment = function(task, comment) {
       var index = $scope.task.comments.indexOf(comment);
-      commentFactory.remove({project_id: project.id, task_id: task.id, id: comment.id});
+      commentFactory.remove({id: comment.id});
       $scope.task.comments.splice(index, 1);
     };
 
-    $scope.updateComment = function(project, task, comment) {
-      commentFactory.update({project_id: project.id, task_id: task.id, id: comment.id, text: comment.text});
+    $scope.updateComment = function(comment) {
+      commentFactory.update({id: comment.id, text: comment.text});
     };
 
     $scope.urlToName = function(url) {
@@ -54,7 +54,7 @@ angular.module('todo')
     };
 
     $scope.validateText = function(data) {
-      if (data == '') {
+      if (data === '') {
         return ' ';
       }
     };

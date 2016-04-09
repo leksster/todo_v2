@@ -13,9 +13,9 @@ angular.module('todo')
       return b.id - a.id;
     });
 
-    $scope.removeTask = function(project, task) {
+    $scope.removeTask = function(task) {
       var index = $scope.project.tasks.indexOf(task);
-      taskFactory.remove({project_id: project.id, id: task.id});
+      taskFactory.remove({id: task.id});
       $scope.project.tasks.splice(index, 1);
     };
 
@@ -45,11 +45,11 @@ angular.module('todo')
       })
     }
 
-    $scope.markTask = function(project, task, doneValue) {
-      taskFactory.update( {project_id: project.id, id: task.id, done: doneValue} )
+    $scope.markTask = function(task, doneValue) {
+      taskFactory.update( {id: task.id, done: doneValue} )
     }
 
-    $scope.editTask = function(project, task) {
+    $scope.editTask = function(task) {
 
       var modalOptions = {
         closeButtonText: 'Cancel',
@@ -64,7 +64,7 @@ angular.module('todo')
       }
 
       modalService.showModal(modalDefaults, modalOptions).then(function(result){
-        taskFactory.update( {project_id: project.id, id: task.id, text: result.text, deadline: result.deadline} )
+        taskFactory.update( {id: task.id, text: result.text, deadline: result.deadline} )
           .$promise.then(function(result) {
             task.deadline = result.deadline;
             task.text = result.text;
