@@ -2,7 +2,7 @@
     <h3 class="modal-title">{{ modalOptions.headerText }}</h3>
 </div>
 <form>
-<div ng-controller="DatepickerDemoCtrl">
+<div>
   <div class="modal-body text-center">
     <div class="row">
       <div class="col-xs-12">
@@ -12,8 +12,9 @@
     <br>
     <div class="row">
       <div class="col-xs-12">
+        {{ $parent.$parent.$parent.inlineOptions.minDate; }}
         <div style="display:inline-block; min-height:290px;">
-          <uib-datepicker ng-model="modalOptions.task.deadline" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
+          <uib-datepicker ng-model="modalOptions.task.deadline" class="well well-sm" datepicker-options="modalOptions.dateOptions"></uib-datepicker>
           <pre>Selected date is: <em>{{modalOptions.task.deadline | date:'fullDate' }}</em></pre>
         </div>
       </div>

@@ -31,12 +31,21 @@ angular.module('todo')
       var modalOptions = {
         closeButtonText: 'Cancel',
         actionButtonText: 'Add',
-        headerText: 'Add task deadline.'
+        headerText: 'Add task deadline.',
+        dateOptions: {
+          minDate: new Date(),
+          showWeeks: true
+        }
       }
 
       var modalDefaults = {
         animation: true,
         templateUrl: 'assets/templates/modals/add-deadline.html'
+      }
+
+      var dateOptions = {
+        minDate: new Date(),
+        showWeeks: true
       }
 
       modalService.showModal(modalDefaults, modalOptions).then(function(result){
@@ -55,7 +64,11 @@ angular.module('todo')
         closeButtonText: 'Cancel',
         actionButtonText: 'Update',
         headerText: 'Edit task',
-        task: task
+        task: task,
+        dateOptions: {
+          minDate: new Date(),
+          showWeeks: true
+        }
       }
 
       var modalDefaults = {
