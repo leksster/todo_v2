@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'faker'
 
-feature "Visiting the homepage", js: true do
+feature "Tasks features", js: true do
   let(:user) {create(:user)}
   let(:project) {create(:project, user: user)}
   let(:task) {create(:task, project: project)}

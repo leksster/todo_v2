@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'faker'
 
-feature "Visiting the homepage", js: true do
+feature "Comments features", js: true do
 
   background do
     @user = create(:user)

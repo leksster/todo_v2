@@ -11,11 +11,16 @@ require 'faker'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'selenium-webdriver'
-require_relative 'support/requests_helpers.rb'
+require_relative 'support/custom_helpers.rb'
 
 # Capybara.default_driver = :selenium
 
+# Capybara.register_driver :poltergeist_debug do |app|
+#   Capybara::Poltergeist::Driver.new(app, :inspector => true)
+# end
+
 Capybara.javascript_driver = :poltergeist
+# Capybara.javascript_driver = :poltergeist_debug
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -43,7 +48,8 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include Warden::Test::Helpers
   #JSON parse helper
-  config.include Requests::JsonHelpers
+  config.include Custom::JsonHelpers
+  config.include Custom::FeatureHelpers
   # Factory girl
   config.include FactoryGirl::Syntax::Methods
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'faker'
 
-feature "Visiting the homepage", js: true do
+feature "Projects features", js: true do
   let(:user) {create(:user)}
   let(:project) {create(:project, user: user)}
 
@@ -12,18 +12,22 @@ feature "Visiting the homepage", js: true do
 
   after { visit '/'; Capybara.reset_session! }
 
-  scenario "User can CREATE Projects" do
+  scenario "User can READ Projects" do
+    sleep(3)
+    save_screenshot('./f.png')
+    expect(page).to have_content(project.name)
+  end
+
+  scenario "User can CREATE and READ Projects" do
     projectName = Faker::Hipster.sentence(5)
     click_button "Add TODO List"
     fill_in "projectNameInput", with: projectName
     click_button "OK"
     expect(page).to have_content(projectName)
-  end
-
-  scenario "User can READ Projects" do
-    sleep(3)
     expect(page).to have_content(project.name)
   end
+
+
 
   scenario "User can UPDATE Projects" do
     newName = Faker::Hipster.sentence(5)
