@@ -15,7 +15,3 @@ asset 'ng-token-auth'
 asset 'angular-ui-router'
 asset 'angular-ui-notification'
 asset 'bootstrap-social'
-
-
-asset 'angular-route'
-asset 'angular-cookies'
