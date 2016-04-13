@@ -17,7 +17,7 @@
     .tasks{'ng-repeat'=>"task in project.tasks", 'data-as-sortable-item'=>''}
       .row.content-box{'data-as-sortable-item-handle'=>''}
         .check-box
-          %input{type: 'checkbox', 'ng-model'=>'task.done', 'ng-click'=>'markTask(project, task, task.done)', 'ng-checked'=>'task.done'}
+          %input{type: 'checkbox', 'ng-model'=>'task.done', 'ng-click'=>'markTask(task, task.done)', 'ng-checked'=>'task.done'}
         .divider
         
         .col-xs-10.content-text
