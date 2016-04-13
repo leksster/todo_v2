@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+group :production do
+  gem 'rails_12factor'
+end
+
 gem 'omniauth-facebook'
 gem 'devise'
 gem 'devise_token_auth'
