@@ -1,0 +1,47 @@
+<!-- client/app/views/user_sessions/new.html -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-4 col-sm-offset-4 text-center title">
+      <h1><span class="glyphicon glyphicon-lock"></span> Sign In</h1>
+      <br>
+
+      <a ng-click="handleBtnClick('facebook')" class="btn btn-social btn-lg btn-facebook">
+        <span class="fa fa-facebook"></span>
+        with Facebook
+      </a>
+      <br><br><br>     
+      <form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email"
+                 name="email"
+                 id="email"
+                 ng-model="loginForm.email"
+                 required="required"
+                 class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password"
+                 name="password"
+                 id="password"
+                 ng-model="loginForm.password"
+                 required="required"
+                 class="form-control">
+        </div>
+        <div class="todo-buttons block-center">
+          <button type="submit" class="btn btn-primary">Sign in</button><br>
+          <a href="#/register" class="btn btn-primary">Sign up</a><br>
+        </div>
+
+      </form> 
+    </div>
+  </div>
+</div>
+
+<ul>
+  {{ user.email }}
+  {{ user.token }}
+  <li ng-show='user.id'><a ng-click="signOut()">Sign out</a></li>
+</ul>

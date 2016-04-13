@@ -1,0 +1,44 @@
+<div class='container main' ng-controller='ProjectController'>
+  <div class='title'>
+    <h1 class='text-center'>SIMPLE TODO LISTS</h1>
+    <h4 class='text-center'>FROM RUBY GARAGE</h4>
+  </div>
+  <div class='row text-center'>
+    <p ng-if='user.image'>
+      <img ng-src='{{user.image}}'>
+      <br>
+      {{user.name}}
+      <br>
+      <button class='btn btn-danger main_button' ng-click='signOut()' ng-controller='UserSessionsCtrl'>
+        Logout
+      </button>
+    </p>
+    <p ng-if='!user.image'>
+      {{ user.email }}
+      <br>
+      <button class='btn btn-danger main_button' ng-click='signOut()' ng-controller='UserSessionsCtrl'>
+        Logout
+      </button>
+    </p>
+  </div>
+  <div class='col-xs-12 text-center' ng-if='!showData'>
+    <h6>
+      {{ message }}
+    </h6>
+  </div>
+  <todo_projects></todo_projects>
+  <div class='row'>
+    <div class='col-xs-12 center-block todo-buttons'>
+      <button class='btn btn-primary main_button' ng-click='newProject()'>
+        <img src="/assets/icon-plus-blue.fw-9f7f4e3c1fa9d75ece5d837b5cc8154ebdfe7f61205b5fb5c093d9bb37a71b73.png" alt="Icon plus blue.fw" />
+        Add TODO List
+      </button>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-xs-12'>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>

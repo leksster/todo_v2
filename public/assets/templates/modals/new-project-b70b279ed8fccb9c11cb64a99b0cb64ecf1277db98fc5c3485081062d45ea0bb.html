@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{modalOptions.headerText}}</h3>
+</div>
+<form>
+  <div class="modal-body">
+      <input name="projectNameInput" type="text" class='form-control' ng-model='newProjectName' autofocus="true" required>
+  </div>
+  <div class="modal-footer">
+      <button ng-disabled="!newProjectName" class="btn btn-primary" type="submit" ng-click="modalOptions.ok(newProjectName)">OK</button>
+      <button class="btn btn-warning" type="button" ng-click="modalOptions.close()">Cancel</button>
+  </div>
+
+</form>

@@ -1,0 +1,18 @@
+<div class="modal-header" >
+    <h3 class="modal-title">{{modalOptions.headerText}}</h3>
+</div>
+<form>
+<div>
+  <div class="modal-body text-center">
+      <div style="display:inline-block; min-height:290px;">
+        <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="modalOptions.dateOptions"></uib-datepicker>
+        <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+      </div>
+  </div>
+  {{task.date}}
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="submit" ng-click="modalOptions.ok(dt)">{{modalOptions.actionButtonText}}</button>
+      <button class="btn btn-warning" type="button" ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>   
+  </div>
+</div>
+</form>

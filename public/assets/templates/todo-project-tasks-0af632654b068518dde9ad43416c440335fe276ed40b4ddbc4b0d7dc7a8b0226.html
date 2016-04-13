@@ -1,0 +1,66 @@
+<div class='content' ng-controller='TaskController'>
+  <div class='row form-box'>
+    <div class='hidden-xs note-box'>
+      <img class="icon-plus" src="/assets/icon-plus.fw-466ba9b59ff0d3a38fc9411eb6b257dfa9c7e4789f8a87e9ee861242b393e44a.png" alt="Icon plus.fw" />
+    </div>
+    <div class='col-xs-12 col-sm-12'>
+      <form name='taskForm' novalidate=''>
+        <div class='input-group'>
+          <input class='form-control' name='taskText' ng-model='newTask' placeholder='Start typing here to create a task...' required='' type='text'>
+          <span class='input-group-btn'>
+            <button class='btn btn-default datepick' ng-click='addDeadline()' type='button'>
+              <span class='glyphicon glyphicon-calendar'></span>
+              {{deadline.date | date : format : timezone}}
+            </button>
+            <button class='btn btn-default submit' ng-click='createTask(project)' ng-disabled='!newTask' type='submit'>
+              Add Task
+            </button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class='sort' data-as-sortable='dragControlListeners' data-ng-model='project.tasks'>
+    <div class='tasks' data-as-sortable-item='' ng-repeat='task in project.tasks'>
+      <div class='row content-box' data-as-sortable-item-handle=''>
+        <div class='check-box'>
+          <input ng-checked='task.done' ng-click='markTask(project, task, task.done)' ng-model='task.done' type='checkbox'>
+        </div>
+        <div class='divider'></div>
+        <div class='col-xs-10 content-text'>
+          <span class='label label-warning pull-right' ng-show='task.deadline || task.comments.length'>
+            <span ng-click='editTask(project, task)' ng-show='task.deadline'>
+              due to: {{ task.deadline | date : format : timezone }}
+            </span>
+            <span ng-click='$parent.showComments=!$parent.showComments' ng-show='task.comments.length'>
+              <span class='glyphicon glyphicon-comment'></span>
+              {{ task.comments.length }}
+            </span>
+          </span>
+          <a ng-class='{ decorate: task.done }' ng-click='$parent.showComments=!$parent.showComments'>
+            {{ task.text }}
+          </a>
+        </div>
+        <div class='col-xs-2 icons-edit'>
+          <ul class='list-inline hide'>
+            <li>
+              <a></a>
+              <img src="/assets/icon-up-down-item.fw-d3f27eb8924d5fea13b80aeb070dbf117afed9a8e9f8222bf213d6885d6c375a.png" alt="Icon up down item.fw" />
+            </li>
+            <li>
+              <a class='editTask' ng-click='editTask(task)'>
+                <img src="/assets/icon-pensil-item.fw-1a1edf11cf1e6e6470117dbb7356014e63767f70cb4357b737967edc8014ec6c.png" alt="Icon pensil item.fw" />
+              </a>
+            </li>
+            <li>
+              <a class='removeTask' ng-click='removeTask(task)'>
+                <img src="/assets/icon-trash-item.fw-0c0b145db98b12f8eb229d7a8dc108f2b1e64d72dc679f782d1a31f716390f8a.png" alt="Icon trash item.fw" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <todo_task_comments></todo_task_comments>
+    </div>
+  </div>
+</div>
