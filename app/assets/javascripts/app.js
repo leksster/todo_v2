@@ -12,7 +12,7 @@ angular
     "ui.router",
     "ui-notification"])
 
-  .config(function($stateProvider, $urlRouterProvider, $authProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($stateProvider, $urlRouterProvider, $authProvider) {
     $urlRouterProvider.otherwise("/");
 
     $stateProvider
@@ -48,19 +48,19 @@ angular
       },
       omniauthWindowType: 'newWindow'
     })
-  })
+  }])
 
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.latencyThreshold = 0;
   }])
 
-  .run(function($rootScope, $state, $stateParams) {
+  .run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-  })
+  }])
 
-  .run(function(editableOptions, editableThemes) {
+  .run(['editableOptions', 'editableThemes', function(editableOptions, editableThemes) {
     editableThemes.bs3.inputClass = 'input-sm';
     editableThemes.bs3.buttonsClass = 'btn-sm';
     editableOptions.theme = 'bs3';
-  });
+  }]);
