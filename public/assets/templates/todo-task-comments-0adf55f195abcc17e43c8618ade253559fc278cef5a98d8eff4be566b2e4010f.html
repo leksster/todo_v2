@@ -1,0 +1,84 @@
+<div class='comments' ng-controller='CommentController' ng-show='showComments'>
+  <div class='row'>
+    <div class='col-xs-12'>
+      <h6>
+        Comments:
+      </h6>
+      <hr>
+    </div>
+  </div>
+  <div class='row' ng-repeat='comment in task.comments | orderBy: "id"'>
+    <div class='col-xs-12'>
+      <blockquote>
+        <div class='row comment-row'>
+          <div class='col-xs-10' style='float:left;'>
+            <p e-form='editComment' editable-text='comment.text' onaftersave='updateComment(comment)' onbeforesave='validateText($data)'>
+              {{ comment.text }}
+              <span class='pull-right date'>
+                {{ comment.created_at | date : format : timezone }}
+              </span>
+            </p>
+            <p ng-repeat='attach in comment.attaches'>
+              <a ng-href='{{ attach.file.url }}'>
+                {{ urlToName(attach.file.url) }}
+              </a>
+            </p>
+          </div>
+          <div class='col-xs-2 text-right'>
+            <ul class='list-inline delete hide'>
+              <li>
+                <a class='updateComment' ng-click='editComment.$show()' ng-hide='editComment.$visible'>
+                  <img src="/assets/icon-pensil-item.fw-1a1edf11cf1e6e6470117dbb7356014e63767f70cb4357b737967edc8014ec6c.png" alt="Icon pensil item.fw" />
+                </a>
+              </li>
+              <li>
+                <a class='removeComment' ng-click='removeComment(task, comment)'>
+                  <img src="/assets/icon-trash-item.fw-0c0b145db98b12f8eb229d7a8dc108f2b1e64d72dc679f782d1a31f716390f8a.png" alt="Icon trash item.fw" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </blockquote>
+      <hr>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-xs-12'>
+      <form name='uploadForm'>
+        <div class='row'>
+          <div class='form-group'>
+            <input autofocus='' class='form-control' ng-model='newCommentText' placeholder='Comment text...' type='text'>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='form-group'>
+            <span class='btn btn-default btn-file delme'>
+              <input class='filestyle' id='attach' ng-model='file' ngf-max-size='30MB' ngf-model-invalid='errorFile' ngf-select='' type='file'>
+                Attach file
+              </input>
+              <i ng-show='uploadForm.file.$error.maxSize'>File too large {{errorFile.size/ 1000000|number:1}}MB: max 2M</i>
+            </span>
+            {{ file.name }}
+            <img class='thumb' ng-show='uploadForm.file.$valid' ngf-thumbnail='file'>
+            <button class='btn btn-danger' ng-click='file = null' ng-show='file' type='button'>
+              Remove
+            </button>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='form-group'>
+            <span class='progress' ng-show='file.progress &gt;= 0'>
+              <div ng-bind='file.progress + "%"' style='width: {{file.progress}}%'></div>
+            </span>
+            <span ng-show='file.result'>Upload Successfuel</span>
+            <span class='err' ng-show='errorMsg'>{{errorMsg}}</span>
+            <button class='btn btn-primary submit' ng-click='createComment(file, task)' ng-disabled='!newCommentText' type='submit'>
+              Add Comment
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -5,21 +5,26 @@
         Comments: 
       %hr
   .row{'ng-repeat'=> 'comment in task.comments | orderBy: "id"'}
-    .col-xs-12        
+    .col-xs-12       
       %blockquote
-        %p{'editable-text'=>'comment.text', 'e-form'=>'editComment', 'onaftersave'=>'updateComment(comment)', 'onbeforesave'=>'validateText($data)'} 
-          {{ comment.text }}
-          %span.pull-right.delete.hide
-            %a.removeComment{'ng-click'=>'removeComment(task, comment)'}
-              = image_tag('icon-trash-item.fw.png')                        
-          %span.pull-right.delete.hide
-            %a.updateComment{'ng-click'=>'editComment.$show()', 'ng-hide'=>'editComment.$visible'}
-              = image_tag('icon-pensil-item.fw.png')
-          %span.pull-right.date
-            {{ comment.created_at | date : format : timezone }}
-        %p{'ng-repeat'=>'attach in comment.attaches'} 
-          %a{'ng-href' => '{{ attach.file.url }}' }
-            {{ urlToName(attach.file.url) }}
+        .row.comment-row
+          .col-xs-10{'style'=>'float:left;'}
+            %p{'editable-text'=>'comment.text', 'e-form'=>'editComment', 'onaftersave'=>'updateComment(comment)', 'onbeforesave'=>'validateText($data)'} 
+              {{ comment.text }}
+              %span.pull-right.date
+                {{ comment.created_at | date : format : timezone }}
+            %p{'ng-repeat'=>'attach in comment.attaches'} 
+              %a{'ng-href' => '{{ attach.file.url }}' }
+                {{ urlToName(attach.file.url) }}
+          .col-xs-2.text-right
+
+            %ul.list-inline.delete.hide
+              %li
+                %a.updateComment{'ng-click'=>'editComment.$show()', 'ng-hide'=>'editComment.$visible'}
+                  = image_tag('icon-pensil-item.fw.png')
+              %li
+                %a.removeComment{'ng-click'=>'removeComment(task, comment)'}
+                  = image_tag('icon-trash-item.fw.png')
       %hr
   .row
     .col-xs-12

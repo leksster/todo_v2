@@ -270,6 +270,26 @@ body {
     margin: 0 30px;
   }
 
+  .comment-row {
+    margin: 0;
+
+    .col-xs-10 {
+      padding: 0;
+    }
+
+    .col-xs-2 {
+      padding: 0;
+    }
+
+    li {
+      border-right: 1px solid #999999;
+    }
+
+    li:last-child {
+      border-right: none;
+    }
+  }
+
   blockquote {
     word-break: break-all;
     margin: 0;
