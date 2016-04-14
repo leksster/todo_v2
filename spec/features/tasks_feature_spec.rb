@@ -30,14 +30,15 @@ feature "Tasks features", js: true do
       find('.datepick').click
     end
     within('#datepicker') do
-      find('span', text: Time.now.day+3).click  
+      sleep(1)
+      find('button.active').click
     end
-    sleep(3)
     find_button("Add").click
     click_button "Add Task" 
     sleep(2)
     within('.content-box', match: :first) do
-      expect(page).to have_content(Time.now.day+3)
+      expect(page).to have_content(taskText)
+      expect(page).to have_content(Time.now.day)
     end
   end
 
