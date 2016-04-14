@@ -22,7 +22,7 @@
         
         .col-xs-10.content-text
           %span.label.label-warning.pull-right{'ng-show'=>'task.deadline || task.comments.length'}
-            %span{'ng-show'=>'task.deadline', 'ng-click'=>'editTask(project, task)'}
+            %span{'ng-show'=>'task.deadline', 'ng-click'=>'editTask(task)'}
               due to: {{ task.deadline | date : format : timezone }}  
             %span{'ng-show'=>'task.comments.length', 'ng-click'=>'$parent.showComments=!$parent.showComments'}
               %span.glyphicon.glyphicon-comment
