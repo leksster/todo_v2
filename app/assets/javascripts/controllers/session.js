@@ -6,7 +6,8 @@ angular.module('todo')
         .then(function(resp) {
         })
         .catch(function(resp) {
-          Notification.error({message: 'Error!', positionY: 'bottom'});
+          console.log(resp);
+          Notification.error({message: resp.errors.join(), positionY: 'bottom'});
         });
     }
 

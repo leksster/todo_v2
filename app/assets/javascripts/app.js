@@ -46,7 +46,8 @@ angular
       authProviderPaths: {
         facebook: 'auth/facebook'
       },
-      omniauthWindowType: 'newWindow'
+      omniauthWindowType: 'newWindow',
+      forceHardRedirect: true
     })
   }])
 

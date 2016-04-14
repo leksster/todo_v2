@@ -32,7 +32,7 @@ feature "Tasks features", js: true do
     within('#datepicker') do
       find('span', text: Time.now.day+3).click  
     end
-    sleep(2)
+    sleep(3)
     find_button("Add").click
     click_button "Add Task" 
     sleep(2)
