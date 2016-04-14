@@ -15,12 +15,12 @@ require_relative 'support/custom_helpers.rb'
 
 # Capybara.default_driver = :selenium
 
-# Capybara.register_driver :poltergeist_debug do |app|
-#   Capybara::Poltergeist::Driver.new(app, :inspector => true)
-# end
-
 Capybara.javascript_driver = :poltergeist
 # Capybara.javascript_driver = :poltergeist_debug
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, timeout: 1000, js_errors: false)
+end
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -44,6 +44,8 @@ Capybara.javascript_driver = :poltergeist
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.use_transactional_fixtures = false
+
   Warden.test_mode!
   config.include Devise::TestHelpers, type: :controller
   config.include Warden::Test::Helpers
@@ -55,7 +57,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = false
+  
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

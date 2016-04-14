@@ -43,11 +43,6 @@ angular.module('todo')
         templateUrl: 'assets/templates/modals/add-deadline.html'
       }
 
-      var dateOptions = {
-        minDate: new Date(),
-        showWeeks: true
-      }
-
       modalService.showModal(modalDefaults, modalOptions).then(function(result){
         result.setHours(12);
         $scope.deadline.date = result;

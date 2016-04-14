@@ -13,8 +13,6 @@ feature "Projects features", js: true do
   after { visit '/'; Capybara.reset_session! }
 
   scenario "User can READ Projects" do
-    sleep(3)
-    save_screenshot('./f.png')
     expect(page).to have_content(project.name)
   end
 
