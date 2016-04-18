@@ -63,6 +63,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'poltergeist'
+  gem 'show_me_the_cookies'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

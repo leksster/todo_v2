@@ -14,13 +14,7 @@ require 'selenium-webdriver'
 require_relative 'support/custom_helpers.rb'
 
 # Capybara.default_driver = :selenium
-
 Capybara.javascript_driver = :poltergeist
-# Capybara.javascript_driver = :poltergeist_debug
-
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, timeout: 1000, js_errors: false)
-end
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -46,12 +40,12 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
-  Warden.test_mode!
+  config.include ShowMeTheCookies, type: :feature
+  
   config.include Devise::TestHelpers, type: :controller
-  config.include Warden::Test::Helpers
   #JSON parse helper
-  config.include Custom::JsonHelpers
-  config.include Custom::FeatureHelpers
+  config.include Custom::JsonHelpers, type: :controller
+  config.include Custom::FeatureHelpers, type: :feature
   # Factory girl
   config.include FactoryGirl::Syntax::Methods
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -88,6 +82,9 @@ RSpec.configure do |config|
   end
 
   config.before(:each, js: true) do
+    Capybara.register_driver :poltergeist do |app|
+      Capybara::Poltergeist::Driver.new(app, timeout: 1000, js_errors: false)
+    end
     DatabaseCleaner.strategy = :truncation
   end
 

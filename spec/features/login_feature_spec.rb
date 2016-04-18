@@ -3,7 +3,6 @@ require 'faker'
 
 feature "Registation", js: true do
   let(:user) {create(:user)}
-  # let(:password) {Faker::Internet.password(8)}
 
   before { visit '/' }
 

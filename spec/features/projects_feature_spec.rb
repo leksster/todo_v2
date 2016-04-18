@@ -5,8 +5,9 @@ feature "Projects features", js: true do
   let(:user) {create(:user)}
   let(:project) {create(:project, user: user)}
 
+
   background do
-    login(user)
+    sign_in_driver(user)
     project
   end
 
@@ -24,8 +25,6 @@ feature "Projects features", js: true do
     expect(page).to have_content(projectName)
     expect(page).to have_content(project.name)
   end
-
-
 
   scenario "User can UPDATE Projects" do
     newName = Faker::Hipster.sentence(5)

@@ -34,6 +34,12 @@ RSpec.describe Api::CommentsController, type: :controller do
         req
         expect(response).to render_template(:show)
       end
+
+      it "not authorized" do
+        ability.cannot :manage, Comment
+        req
+        expect(response).to be_forbidden
+      end
     end
 
     context "PUT #update" do
@@ -51,6 +57,12 @@ RSpec.describe Api::CommentsController, type: :controller do
 
       it "renders :show" do
         expect(response.body).to be_blank
+      end
+
+      it "not authorized" do
+        ability.cannot :manage, Comment
+        put :update, {task_id: task.id, id: comment.id, format: :json, comment: attributes_for(:comment)}
+        expect(response).to be_forbidden
       end
     end
 
@@ -71,6 +83,12 @@ RSpec.describe Api::CommentsController, type: :controller do
       it "deletes the comment" do
         task; comment
         expect{req}.to change(Comment, :count).by(-1)
+      end
+
+      it "not authorized" do
+        ability.cannot :manage, Comment
+        req
+        expect(response).to be_forbidden
       end
     end
 

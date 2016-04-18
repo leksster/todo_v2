@@ -33,6 +33,12 @@ RSpec.describe Api::TasksController, type: :controller do
         req
         expect(response).to render_template(:show)
       end
+
+      it "not authorize" do
+        ability.cannot :manage, Task
+        req
+        expect(response).to be_forbidden
+      end
     end
 
     context "PUT #update" do
@@ -50,6 +56,12 @@ RSpec.describe Api::TasksController, type: :controller do
 
       it "renders :show" do
         expect(response.body).to be_blank
+      end
+
+      it "not authorize" do
+        ability.cannot :manage, Task
+        put :update, {project_id: project.id, id: task.id, format: :json, task: attributes_for(:task)}
+        expect(response).to be_forbidden
       end
     end
 
@@ -70,6 +82,12 @@ RSpec.describe Api::TasksController, type: :controller do
       it "deletes the task" do
         project; task
         expect{req}.to change(Task, :count).by(-1)
+      end
+
+      it "not authorize" do
+        ability.cannot :manage, Task
+        req
+        expect(response).to be_forbidden
       end
     end
 

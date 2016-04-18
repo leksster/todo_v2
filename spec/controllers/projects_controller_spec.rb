@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 RSpec.describe Api::ProjectsController, type: :controller do
-  render_views
   let(:user) { create(:user) }
 
   before do
@@ -35,6 +34,12 @@ RSpec.describe Api::ProjectsController, type: :controller do
       it "assigns @projects" do
         expect(assigns(:projects)).to eq([project])
       end
+
+      it 'not authorized' do
+        @ability.cannot :manage, Project
+        get :index, format: :json
+        expect(response).to be_forbidden
+      end
     end
 
     context "GET #show" do
@@ -52,6 +57,12 @@ RSpec.describe Api::ProjectsController, type: :controller do
 
       it "assigns @project" do
         expect(assigns(:project)).to eq(project)
+      end
+
+      it 'not authorized' do
+        @ability.cannot :manage, Project
+        get :show, {:id=>project.id, format: :json} 
+        expect(response).to be_forbidden
       end
     end
 
@@ -76,6 +87,12 @@ RSpec.describe Api::ProjectsController, type: :controller do
         req
         expect(response).to render_template(:show)
       end
+
+      it 'not authorized' do
+        @ability.cannot :manage, Project
+        post :create, { project: attributes_for(:project), format: :json }
+        expect(response).to be_forbidden
+      end
     end
 
     context "PUT #update" do
@@ -94,6 +111,12 @@ RSpec.describe Api::ProjectsController, type: :controller do
 
       it "renders :show" do
         expect(response).to render_template(:show)
+      end
+
+      it 'not authorized' do
+        @ability.cannot :manage, Project
+        put :update, { id: project, project: attributes_for(:project), format: :json }
+        expect(response).to be_forbidden
       end
     end
 
@@ -115,6 +138,12 @@ RSpec.describe Api::ProjectsController, type: :controller do
 
       it "deletes the project" do
         expect{req}.to change(Project, :count).by(-1)
+      end
+
+      it 'not authorized' do
+        @ability.cannot :manage, Project
+        delete :destroy, { id: project.id, format: :json }
+        expect(response).to be_forbidden
       end
     end
 

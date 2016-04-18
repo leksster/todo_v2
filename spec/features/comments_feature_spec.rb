@@ -8,7 +8,7 @@ feature "Comments features", js: true do
     @project = create(:project, user: @user)
     @task = create(:task, project: @project)
     @comment = create(:comment, task: @task)
-    login(@user)
+    sign_in_driver(@user)
   end
 
   after { visit '/'; Capybara.reset_session! }
@@ -23,6 +23,7 @@ feature "Comments features", js: true do
       find("input").set(commentText)
     end
     click_button 'Add Comment'
+    expect(page).to have_content(commentText)
   end
 
   scenario "User can CREATE Comment with file attached" do 
@@ -36,6 +37,8 @@ feature "Comments features", js: true do
     page.execute_script("$('span.delme').children().unwrap();")
     attach_file('attach', File.absolute_path('./Rakefile'))
     click_button 'Add Comment'
+    expect(page).to have_content(commentText)
+    expect(page).to have_content('Rakefile')
   end
 
   scenario "User can READ Comments" do
@@ -47,12 +50,18 @@ feature "Comments features", js: true do
   end
 
   scenario "User can UPDATE Comments" do
+    expect(page).to have_content(@task.text)
     newText = Faker::Hipster.sentence(5)
     within('.tasks', text: @task.text) do
       find('a', text: @task.text).click
       find('blockquote').hover
       find('.updateComment').click
+      find('.editable-input').set(newText)
     end
+    within('.editable-buttons') do
+      find('.btn-primary').click
+    end
+    expect(page).to have_content(newText)
   end
 
   scenario "User can DELETE Comments" do
